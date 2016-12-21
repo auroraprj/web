@@ -15,17 +15,8 @@ cd $HOME/apps/drupal/htdocs
 #-- copiamos logo que se usa en theme
 cp $HOME/logo_aurora_grises_80.png sites/default/files
 
-#-- instalamos Bootstrap
-drush dl bootstrap
+#-- instalamos Bootstrap y features (necestia config_update)
+drush dl bootstrap config_update features
 
-#-- borramos BD para importar después
-drush sql-drop
-
-#-- importamos BD. Asumimos que el fichero está en $HOME/aurora.sql
-drush sql-cli < $HOME/aurora.sql
-
-#-- actualizamos estructura de BD a la Versión instalada
-drush updatedb
-
-#-- cache
-sudo -u daemon  -g daemon drush cr
+#-- activamos features
+drush en features features_ui
