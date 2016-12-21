@@ -13,6 +13,10 @@ La web se basa en drupal sobre máquinas bitnami
 - Lanzamos inicialización: ./tools/aurora_init.sh
 - Importamos BD: ./tools/aurora_import.sh
 
+### Notas
+
+- Asumimos que la clonación se hace en el directorio $HOME
+
 ### Exportación de datos
 
 ./tools/aurora_export.sh

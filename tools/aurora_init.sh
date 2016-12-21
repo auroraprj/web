@@ -13,7 +13,7 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 cd $HOME/apps/drupal/htdocs
 
 #-- copiamos logo que se usa en theme
-cp $HOME/logo_aurora_grises_80.png sites/default/files
+cp $HOME/web/media/logo_aurora_grises_80.png sites/default/files
 
 #-- instalamos Bootstrap y features (necestia config_update)
 drush dl bootstrap config_update features
