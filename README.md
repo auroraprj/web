@@ -25,6 +25,7 @@ La web se basa en drupal sobre máquinas bitnami. El stack drupal de bitnami inc
 
 * Asumimos que la clonación se hace en el directorio `$HOME/web`
 * El proceso de init activa el servicio `ssh`. Por favor, tenerlo en cuenta a efectos de seguridad.
+* El proceso init pedirá clave dado que algunos de las acciones necesita ejecución con `sudo`
 
 ### Exportación de datos
 

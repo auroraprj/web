@@ -1,3 +1,5 @@
+#-- entorno
+. $HOME/web/tools/aurora_env.sh
 
 #-- activamos ssh
 sudo mv /etc/init/ssh.conf.back /etc/init/ssh.conf
@@ -10,13 +12,19 @@ sudo /opt/bitnami/apps/drupal/bnconfig --disable_banner 1
 sudo /opt/bitnami/ctlscript.sh restart apache
 
 #-- vamos con drupal. Usaremos drush para operar
-cd $HOME/apps/drupal/htdocs
+cd $drupal
 
 #-- copiamos logo que se usa en theme
-cp $HOME/web/media/logo_aurora_grises_80.png sites/default/files
+cp $git/media/logo_aurora_grises_80.png sites/default/files
 
-#-- instalamos Bootstrap y features (necestia config_update)
-drush dl bootstrap config_update features
+#-- instalamos Bootstrap theme
+drush pm-download bootstrap
 
-#-- activamos features
-drush en features features_ui
+#-- activamos Bootstrap
+drush --yes pm-enable bootstrap
+
+#-- cargamos configuración
+drush --yes config-import --source=$git/config
+
+#-- cache
+sudo -u daemon -g daemon drush cache-rebuild

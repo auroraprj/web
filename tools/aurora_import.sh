@@ -1,3 +1,6 @@
+#-- entorno
+. $HOME/web/tools/aurora_env.sh
+
 #-- borramos BD para importar después
 drush sql-drop
 
@@ -8,4 +11,4 @@ drush sql-cli < $HOME/aurora.sql
 drush updatedb
 
 #-- cache
-sudo -u daemon  -g daemon drush cr
+sudo -u daemon -g daemon drush cache-rebuild
