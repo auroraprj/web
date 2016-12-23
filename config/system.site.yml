@@ -1,0 +1,14 @@
+uuid: d0584c52-f8b1-45bb-a49d-21ff5da4a5c4
+name: 'user''s Site'
+mail: user@example.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: AyT9s8OUcclfALRE_imByOMgtZ19eOlqdF6zI3p7yqo
