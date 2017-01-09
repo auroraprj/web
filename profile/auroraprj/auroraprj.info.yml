@@ -1,0 +1,25 @@
+name: Auroraprj
+type: profile
+description: 'auroraprj install profile'
+project: 'auroraprj'
+core: '8.x'
+version: '8.x-1.0-beta8'
+
+dependencies:
+  - config
+  - system
+  - user
+  - breakpoint
+  - field
+  - filter
+  - node
+  - toolbar
+  - text
+#  - features
+themes:
+  - bartik
+  - seven
+  - bootstrap
+features: true
+distribution:
+  name: Auroraprj
