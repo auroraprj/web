@@ -20,6 +20,9 @@ cp -R $git/profile/auroraprj $drupal/profiles/
 #-- descargamos Bootstrap theme
 drush pm-download bootstrap
 
+#-- necesario para instalación
+chmod u+w ./sites/default/settings.php
+
 #-- instalamos el site auroraprj
 drush -y site-install auroraprj
 
@@ -27,10 +30,10 @@ drush -y site-install auroraprj
 cp $git/media/logo_aurora_grises_80.png sites/default/files
 
 #-- activamos Bootstrap
-drush --yes pm-enable bootstrap
+#drush --yes pm-enable bootstrap
 
 #-- cargamos configuración
-drush --yes config-import --source=$git/config
+#drush --yes config-import --source=$git/config
 
 #-- cache
 sudo -u daemon -g daemon drush cache-rebuild
