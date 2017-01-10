@@ -35,4 +35,7 @@ La web se basa en drupal sobre máquinas bitnami. El stack drupal de bitnami inc
 
 ### Directorios
 
+* `media` --> Elementos multimedia necesarios en la instalación.
 * `tools` --> Herramientas para manejo de la instalación: inicialización, exportación, migración, etc.
+* `profile/auroraprj` --> Profile de intalación del site.
+* `profile/auroraprj/config/install` --> Configuración inicial.
