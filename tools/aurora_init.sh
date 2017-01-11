@@ -29,11 +29,5 @@ drush -y site-install auroraprj
 #-- copiamos logo que se usa en theme
 cp $git/media/logo_aurora_grises_80.png sites/default/files
 
-#-- activamos Bootstrap
-#drush --yes pm-enable bootstrap
-
-#-- cargamos configuración
-#drush --yes config-import --source=$git/config
-
 #-- cache
 sudo -u daemon -g daemon drush cache-rebuild

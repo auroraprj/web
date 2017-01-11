@@ -16,9 +16,6 @@ use Drupal\user\Entity\Role;
  */
 function auroraprj_install() {
 
-#  include_once DRUPAL_ROOT.'/core/profiles/standard/standard.install';
-#  standard_install();
-
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
   $user->roles[] = 'administrator';
