@@ -14,17 +14,20 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 #-- vamos con drupal. Usaremos drush para operar
 cd $drupal
 
-#-- copiamos logo que se usa en theme
-cp $git/media/logo_aurora_grises_80.png sites/default/files
+#-- copiamos profile
+cp -R $git/profile/auroraprj $drupal/profiles/
 
-#-- instalamos Bootstrap theme
+#-- descargamos Bootstrap theme
 drush pm-download bootstrap
 
-#-- activamos Bootstrap
-drush --yes pm-enable bootstrap
+#-- necesario para instalación
+chmod u+w ./sites/default/settings.php
 
-#-- cargamos configuración
-drush --yes config-import --source=$git/config
+#-- instalamos el site auroraprj
+drush -y site-install auroraprj
+
+#-- copiamos logo que se usa en theme
+cp $git/media/logo_aurora_grises_80.png sites/default/files
 
 #-- cache
 sudo -u daemon -g daemon drush cache-rebuild
