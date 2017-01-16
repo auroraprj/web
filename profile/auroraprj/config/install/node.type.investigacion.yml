@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Investigación
+type: investigacion
+description: 'Descripción de la Investigación'
+help: 'Explicación y lineas generales para la publicación de una Investigación'
+new_revision: true
+preview_mode: 1
+display_submitted: false

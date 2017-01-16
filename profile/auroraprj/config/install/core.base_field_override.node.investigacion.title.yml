@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.investigacion
+id: node.investigacion.title
+field_name: title
+entity_type: node
+bundle: investigacion
+label: Investigación
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
