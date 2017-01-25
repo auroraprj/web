@@ -3,8 +3,8 @@ status: true
 dependencies: {  }
 name: Investigación
 type: investigacion
-description: 'Descripción de la Investigación'
-help: 'Explicación y lineas generales para la publicación de una Investigación'
+description: 'Use <em>investigación</em> para publicar información sobre un proyecto de Investigación.'
+help: 'Explique lo más detalladamente posible el objetivo de la Investigación, la hipótesis de trabajo y el desarrollo de la misma. También detalle la dotación económica necesaria y las personas que intervendrán.'
 new_revision: true
 preview_mode: 1
 display_submitted: false
