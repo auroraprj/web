@@ -15,7 +15,7 @@ drupal de bitnami incluye todo lo necesario:
 - git
 - drush
 
-En fases posteriores es proyecto quedará empaquetado y listo para ser instalado
+En fases posteriores el proyecto quedará empaquetado y listo para ser instalado
 en otros entornos mediante `composer` (por ejemplo en Docker).
 
 ### Características

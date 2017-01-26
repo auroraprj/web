@@ -3,7 +3,7 @@ type: profile
 description: 'auroraprj install profile'
 project: 'auroraprj'
 core: '8.x'
-version: '8.x-1.0-alfa1'
+version: '8.x-alfa.0.3'
 
 dependencies:
   - block_content
@@ -27,6 +27,7 @@ dependencies:
   - user
   - views
   - views_ui
+  - field_ui
 themes:
   - bartik
   - seven

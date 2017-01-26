@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.investigacion.body
+    - field.field.node.investigacion.field_dotacion_economica
+    - field.field.node.investigacion.field_image
+    - node.type.investigacion
+  module:
+    - image
+    - text
+    - user
+id: node.investigacion.default
+targetEntityType: node
+bundle: investigacion
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 110
+    settings: {  }
+    third_party_settings: {  }
+  field_dotacion_economica:
+    weight: 104
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+  field_image:
+    weight: 102
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
