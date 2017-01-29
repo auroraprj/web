@@ -3,9 +3,10 @@ type: profile
 description: 'auroraprj install profile'
 project: 'auroraprj'
 core: '8.x'
-version: '8.x-alfa.0.3'
+version: '8.x-alfa.0.4'
 
 dependencies:
+  - basic_auth
   - block_content
   - breakpoint
   - ckeditor
@@ -19,15 +20,18 @@ dependencies:
   - menu_link_content
   - node
   - path
+  - rest
   - search
+  - serialization
   - system
   - taxonomy
   - text
   - toolbar
   - user
   - views
-  - views_ui
   - field_ui
+  - views_ui
+  - restui
 themes:
   - bartik
   - seven

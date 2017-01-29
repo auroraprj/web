@@ -20,6 +20,9 @@ cp -R $git/profile/auroraprj $drupal/profiles/
 #-- descargamos Bootstrap theme
 drush pm-download bootstrap
 
+#-- descargamos módulo RESTui
+drush pm-download restui
+
 #-- necesario para instalación
 chmod u+w ./sites/default/settings.php
 

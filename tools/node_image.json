@@ -1,0 +1,14 @@
+{
+  "fid":[{"value":"1"}],
+  "uuid":[{"value":"6274f543-60ae-48d7-9516-1bd6288555a0"}],
+  "langcode":[{"value":"en"}],
+  "uid":[{"target_id":"1","target_type":"user","target_uuid":"85fc98e5-e54f-4241-a7fa-876f5287626b","url":"\/user\/1"}],
+  "filename":[{"value":"imagen_aurora.jpg"}],
+  "uri":[{"value":"public:\/\/2017-01\/imagen_aurora.jpg"}],
+  "filemime":[{"value":"image\/jpeg"}],
+  "filesize":[{"value":"198450"}],
+  "status":[{"value":"1"}],
+  "created":[{"value":"1485635112"}],
+  "changed":[{"value":"1485635139"}],
+  "data":[{"value":"insert-output-from-base64-here"}]
+}
