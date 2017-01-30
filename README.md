@@ -32,6 +32,7 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 
 * Descargamos máquina virtual bitnami con stack drupal: https://bitnami.com/stack/drupal
 * Nos logamos con el usuario bitnami y clonamos el Proyecto: `git clone https://github.com/auroraprj/web.git`
+* El módulo `rest` necesita activar la variable `always_populate_raw_post_data=-1` en `php.ini`
 * Lanzamos inicialización: `./web/tools/aurora_init.sh`
 
 ### Notas
@@ -40,16 +41,16 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 * El proceso de init activa el servicio `ssh`. Por favor, téngalo en cuenta a efectos de seguridad.
 * El proceso init pedirá clave dado que algunas acciones necesita ejecución con `sudo`
 
+### Contenido para tests
+
+* Script de importación `tools/import_data_test.sh`
+ * Página con todos los elementos disponibles.
+ * Investigación.
+
 ### Directorios
 
 * `media` --> Elementos multimedia necesarios en la instalación.
+* `test/content` --> Contenido para test.
 * `tools` --> Herramientas para manejo de la instalación: inicialización, exportación, migración, etc.
 * `profile/auroraprj` --> Profile de instalación del site.
 * `profile/auroraprj/config/install` --> Configuración inicial.
-
-### Exportación de datos
-
-Script para exportación de la BD completa.
-```
-./tools/aurora_export.sh
-```
