@@ -8,6 +8,20 @@ sudo start ssh
 #-- eliminamos banner de bitnami
 sudo /opt/bitnami/apps/drupal/bnconfig --disable_banner 1
 
+#-- nos aseguramos que tenemo el parámetro always_populate_raw_post_data = -1 en php.ini
+always_populate='always_populate_raw_post_data = -1'
+
+#-- averiguamos la ubicación de php.ini
+phpini=`php --ini | egrep --only-matching '/.*/php.ini'`
+
+#-- comprobamos que está activado el parámetro y lo activamos si fuera necesario
+egrep --silent "^[^; ]*$always_populate" $phpini || echo $always_populate >> $phpini
+
+# posiblemente la forma de actualizar el parámetro no es muy elegante, ya que soltamos
+# el parámetro en la última linea, fuera de su sección, pero parece que funciona
+# adecuadamente. Siempre se tiene la opción de incluir manualmente dicho parámetro,
+# con lo que el script no actuará
+
 #-- relanzamos apache
 sudo /opt/bitnami/ctlscript.sh restart apache
 
