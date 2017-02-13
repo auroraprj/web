@@ -20,15 +20,5 @@ function auroraprj_install() {
   $user = User::load(1);
   $user->roles[] = 'administrator';
   $user->save();
-
-  // Create the content manager role.
-  $data = array('id' => 'contentmanager', 'label' => 'Content manager');
-  $role = Role::create($data);
-  $role->save();
-
-  // Create the site manager role.
-  $data = array('id' => 'sitemanager', 'label' => 'Site manager');
-  $role = Role::create($data);
-  $role->save();
-
+  
 }
