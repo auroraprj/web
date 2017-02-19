@@ -16,9 +16,13 @@ use Drupal\user\Entity\Role;
  */
 function auroraprj_install() {
 
+  // Ensure the translation fields are created in the database (ver http://cgit.drupalcode.org/multilingual_demo/tree/multilingual_demo.install?id=997f6dc26bdaa8084e63941f27f0d99f9fd4553d)
+  // tarea necesaria tras la activación del módulo content_translation
+  \Drupal::service('entity.definition_update_manager')->applyUpdates();
+
   // Assign user 1 the "administrator" role.
   $user = User::load(1);
   $user->roles[] = 'administrator';
   $user->save();
-  
+
 }

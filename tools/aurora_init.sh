@@ -125,6 +125,15 @@ then
   #-- lenguaje por defecto en español
   drush -y config-set system.site default_langcode es
 
+  #-- Ubicación 'España'
+  drush -y config-set system.date country.default ES
+
+  #-- Lunes el primer día de la Semana
+  drush -y config-set system.date first_day 1
+
+  #-- Zona horaria de Madrid
+  drush -y config-set system.date timezone.default 'Europe/Madrid'
+
   #-- actualizamos las traducciones
   drush locale-update
 
