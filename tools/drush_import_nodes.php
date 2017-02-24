@@ -52,9 +52,12 @@ foreach ($fnodes as $node_name) {
 
     // actualizamos los datos de la traducción
     $translation->title = $n->title;
+    $translation->status = $n->status;
+    $translation->promote = $n->promote;
     $translation->body->value = $n->body->value;
     $translation->body->format = $n->body->format;
     $translation->body->summary = $n->body->summary;
+    $translation->field_image = $n->field_image;
 
     // guardamos
     $translation->save();
