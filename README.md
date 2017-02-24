@@ -54,6 +54,7 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 
 - `media` --> Elementos multimedia necesarios en la instalación.
 - `test/content` --> Contenido para test.
+- `test/images` --> Imágenes para test.
 - `tools` --> Herramientas para manejo de la instalación: inicialización, exportación, migración, etc.
 - `profile/auroraprj` --> Profile de instalación del site.
 - `profile/auroraprj/config/install` --> Configuración inicial.
