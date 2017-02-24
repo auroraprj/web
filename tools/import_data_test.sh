@@ -1,16 +1,6 @@
 #-- entorno
 . $HOME/web/tools/aurora_env.sh
 
-#-- es obligatorio el parámetro con la clave de admin
-if [ $# != 1 ]
-then
-  echo "ERROR! Uso: $0 <clave_admin>" > /dev/stderr
-  exit 1
-fi
-
-#-- clave de admin
-pass=$1
-
 #-- directorio de imágenes para tests
 images=$git/test/images
 

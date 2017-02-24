@@ -46,7 +46,7 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 
 ### Contenido para tests
 
-- Script de importación `tools/import_data_test.sh <clave_admin>`
+- Script de importación `tools/import_data_test.sh`
  - Página con todos los elementos disponibles.
  - Investigación.
 
