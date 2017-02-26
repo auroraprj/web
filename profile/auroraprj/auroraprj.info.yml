@@ -3,7 +3,7 @@ type: profile
 description: 'auroraprj install profile'
 project: 'auroraprj'
 core: '8.x'
-version: '8.x-alfa.0.4'
+version: '8.x-alfa.0.5'
 
 dependencies:
   - basic_auth
@@ -12,11 +12,15 @@ dependencies:
   - ckeditor
   - comment
   - config
+  - config_translation
+  - content_translation
   - field
   - file
   - filter
   - help
   - image
+  - language
+  - locale
   - menu_link_content
   - node
   - path
