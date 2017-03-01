@@ -21,6 +21,12 @@ drush_log('uid:' . $uid);
 // para conversión de valores de importes
 $fmt = new NumberFormatter( 'es_ES', NumberFormatter::DECIMAL );
 
+// expresión regular para identificar hiperenlaces en las notas
+$expr='`((?:https?|ftp)://\S+[[:alnum:]]/?)`si';
+
+// sustitución de los hiperenlaces identificados con etiqueta anchor
+$anchor='<a href="$1">$1</a> ';
+
 // leemos hoja de cálculo en Google Docs con datos del Catálogo de investigaciones en cáncer Infantil
 $data = file_get_contents("https://spreadsheets.google.com/feeds/cells/1kZvBbrfUTGRyAkF5BueY1pedNiT_UkVdIrB6EQwmB_I/1/public/basic?alt=json");
 
@@ -57,9 +63,8 @@ foreach ($hoja as $fila => $value) {
                                             '<p><strong>Periodo</strong>: ' . $value['H'] . '</p>' .
                                             '<p><strong>Última actualización de Datos</strong>: ' . $value['J'] . '</p>' .
                                             '<p><strong>Etiquetas</strong>: ' . $value['K'] . '</p>' .
-                                            '<p><strong>Notas</strong>: ' . $value['L'] . '</p>';
+                                            '<p><strong>Notas</strong>: ' . preg_replace($expr,$anchor,$value['L']) . '</p>';
 
-  // TODO: añadir etiqueta <a> cuando en la Nota contenga un hiperenlace (detectar http[s]://)
   }
 }
 
@@ -108,13 +113,23 @@ foreach ($investigaciones as $investigacion) {
           // si el título ha cambiado, lo actualizamos
           if ($node->getTitle() != $investigacion['titulo']) {
             $node->set('title', $investigacion['titulo']);
+            drush_log('Nuevo título:' . $investigacion['titulo']);
             $modificado = true;
           }
 
-          // TODO: actualizamos si ha cambiado algo
-          $modificado = true;
-          $node->set('field_dotacion_economica', $investigacion['dotacion']);
-          $node->set('body', array('value' => $investigacion['Body'], 'format' => 'basic_html'));
+          // actualiamos si ha cambiado el campo de dotación económica
+          if ($node->field_dotacion_economica->getString() != $investigacion['dotacion']) {
+            $node->set('field_dotacion_economica', $investigacion['dotacion']);
+            drush_log('Nueva dotación económica:' . $investigacion['dotacion']);
+            $modificado = true;
+          }
+
+          // actualiamos si ha cambiado el Body
+          if ($node->body->value != $investigacion['Body']) {
+            $node->set('body', array('value' => $investigacion['Body'], 'format' => 'basic_html'));
+            drush_log('Nuevo Body:' . $investigacion['Body']);
+            $modificado = true;
+          }
 
           // añadimos datos de revisión si ha cambiado algo y guardamos
           if ($modificado) {
