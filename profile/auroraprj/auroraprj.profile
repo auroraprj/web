@@ -7,11 +7,11 @@
  /**
   * Implements hook_entity_bundle_field_info_alter().
   */
- function forum_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
-   // En investigacion, el campo Id debe ser único
-   if ($bundle === 'investigacion') {
-     if (isset($fields['field_id'])) {
-       $fields['field_id']->addConstraint('UniqueField', []);
-     }
-   }
- }
+function auroraprj_entity_bundle_field_info_alter(&$fields, $entity_type, $bundle) {
+  // En investigacion, el campo Id debe ser único
+  if ($bundle === 'investigacion') {
+    if (isset($fields['field_id'])) {
+      $fields['field_id']->addConstraint('UniqueField', []);
+    }
+  }
+}
