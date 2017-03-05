@@ -97,6 +97,13 @@ foreach ($investigaciones as $investigacion) {
             )
           );
 
+          $violations = $node->validate();
+
+          if ($violations->count() > 0) {
+            foreach ($violations as $violation) {
+              drush_log('OPSS!! ' . $violation->getPropertyPath() . $violation->getMessage(),LogLevel::INFO);
+            }
+          }
           $node->save();
           drush_log('Creado node:' . $investigacion['id']);
           break;
@@ -137,6 +144,13 @@ foreach ($investigaciones as $investigacion) {
             $node->setRevisionUserId($uid);
             $node->setRevisionLogMessage('Actualizado por drush_import_google_docs');
 
+            $violations = $node->validate();
+
+            if ($violations->count() > 0) {
+              foreach ($violations as $violation) {
+                drush_log('OPSS!! ' . $violation->getPropertyPath() . $violation->getMessage(),LogLevel::INFO);
+              }
+            }
             $node->save();
             drush_log('Actualizado node:' . $investigacion['id']);
           }

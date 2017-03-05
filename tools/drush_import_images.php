@@ -12,14 +12,33 @@ if (!isset($source)) {
 
 drush_log('source:' . $source);
 
+// usuario que autor de la importación
+$user = drush_get_option('user');
+
+// ... si no hemos pasado parámetro --> usuario 'admin'
+if (!isset($user)) {
+  $user = 'admin';
+}
+drush_log('user:' . $user);
+
+// buscamos el usuario por el nombre
+$uids = \Drupal::entityQuery('user')->condition('name', $user)->execute();
+list($key, $uid) = each($uids);
+
+drush_log('uid:' . $uid);
+
 // ficheros jpg o png del directorio
 $files = glob($source . '/*{jpg,png}', GLOB_BRACE);
 
 // importamos cada una de las imágenes
 foreach ($files as $file_name) {
   drush_log(' >' . $file_name);
-  file_unmanaged_copy($file_name, 'public://' . basename($file_name));
-  $image = File::create(array('uri' => 'public://' . basename($file_name)));
-  $image->setPermanent();
+  $path = 'public://' . basename($file_name);
+  file_unmanaged_copy($file_name, $path);
+  $image = File::create();
+  $image->setFileUri($path);
+  $image->setOwnerId($uid);
+  $image->setMimeType(\Drupal::service('file.mime_type.guesser')->guess($path));
+  $image->setFileName(drupal_basename($path));
   $image->save();
 }

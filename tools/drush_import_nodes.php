@@ -9,6 +9,7 @@
 */
 
 use Drupal\node\Entity\Node;
+use Drush\Log\LogLevel;
 
 // recibimos el directorio en el que se encuentran los nodos a cargar
 $source = drush_get_option('source');
@@ -19,6 +20,21 @@ if (!isset($source)) {
 }
 
 drush_log('source:' . $source);
+
+// usuario que autor de la importación
+$user = drush_get_option('user');
+
+// ... si no hemos pasado parámetro --> usuario 'admin'
+if (!isset($user)) {
+  $user = 'admin';
+}
+drush_log('user:' . $user);
+
+// buscamos el usuario por el nombre
+$uids = \Drupal::entityQuery('user')->condition('name', $user)->execute();
+list($key, $uid) = each($uids);
+
+drush_log('uid:' . $uid);
 
 $serializer = \Drupal::service('serializer');
 
@@ -31,8 +47,17 @@ foreach ($fnodes as $node_name) {
   // leemos y deserializamos el fichero json
   $data = file_get_contents($node_name);
   $node = $serializer->deserialize($data, Node::class, 'json');
-  $node->save();
+  $node->setOwnerId($uid);
 
+  $violations = $node->validate();
+
+  if ($violations->count() > 0) {
+    foreach ($violations as $violation) {
+      drush_log('OPSS!! ' . $violation->getPropertyPath() . $violation->getMessage(),LogLevel::INFO);
+    }
+  }
+  // ... else {  <-- eliminamos provisionalmente el else por issue #23
+  $node->save();
   drush_log('node ' . $node_name . ' -> ' . $node->id());
 
   // las traducciones se encuentran en ficheros json con extensión = idioma
@@ -59,10 +84,16 @@ foreach ($fnodes as $node_name) {
     $translation->body->summary = $n->body->summary;
     $translation->field_image = $n->field_image;
 
+    $violations = $translation->validate();
+
+    if ($violations->count() > 0) {
+      foreach ($violations as $violation) {
+        drush_log('node ' . $node_name . ' ERROR ' . $violation->getMessage(),LogLevel::INFO);
+      }
+    }
+    // ... else {  <-- eliminamos provisionalmente el else por issue #23
     // guardamos
     $translation->save();
-
     drush_log(' > translate ' . $trans_name);
-
   }
 }
