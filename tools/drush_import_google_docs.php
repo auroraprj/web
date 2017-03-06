@@ -87,7 +87,7 @@ foreach ($investigaciones as $investigacion) {
               'type' => 'investigacion',
               'langcode' => 'es',
               'title' => $investigacion['titulo'],
-              'body' => array('value' => $investigacion['Body'], 'format' => 'basic_html'),
+              'body' => array('value' => $investigacion['Body'], 'format' => 'restricted_html'),
               'field_id' => $investigacion['id'],
               'field_dotacion_economica' => $investigacion['dotacion'],
               'uid' => $uid,
@@ -97,15 +97,20 @@ foreach ($investigaciones as $investigacion) {
             )
           );
 
+          // validamos el nodo
           $violations = $node->validate();
 
+          // informamos de los problemas
           if ($violations->count() > 0) {
             foreach ($violations as $violation) {
               drush_log('OPSS!! ' . $violation->getPropertyPath() . $violation->getMessage(),LogLevel::INFO);
             }
           }
-          $node->save();
-          drush_log('Creado node:' . $investigacion['id']);
+          else {
+            // Todo OK. Grabamos!
+            $node->save();
+            drush_log('Actualizado node:' . $investigacion['id']);
+          }
           break;
 
       // ... encontremos el nodo ...
@@ -144,15 +149,20 @@ foreach ($investigaciones as $investigacion) {
             $node->setRevisionUserId($uid);
             $node->setRevisionLogMessage('Actualizado por drush_import_google_docs');
 
+            // validamos el nodo
             $violations = $node->validate();
 
+            // informamos de los problemas
             if ($violations->count() > 0) {
               foreach ($violations as $violation) {
                 drush_log('OPSS!! ' . $violation->getPropertyPath() . $violation->getMessage(),LogLevel::INFO);
               }
             }
-            $node->save();
-            drush_log('Actualizado node:' . $investigacion['id']);
+            else {
+              // todo OK. Grabamos!
+              $node->save();
+              drush_log('Actualizado node:' . $investigacion['id']);
+            }
           }
           break;
 

@@ -1,0 +1,20 @@
+langcode: es
+status: true
+dependencies: {  }
+id: aurora_editor
+label: 'Aurora Editor'
+weight: 3
+is_admin: null
+permissions:
+  - 'translate investigacion node'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'create investigacion content'
+  - 'delete any investigacion content'
+  - 'delete own investigacion content'
+  - 'delete investigacion revisions'
+  - 'edit any investigacion content'
+  - 'edit own investigacion content'
+  - 'revert investigacion revisions'
+  - 'view investigacion revisions'

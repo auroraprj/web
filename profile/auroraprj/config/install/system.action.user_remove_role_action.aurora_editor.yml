@@ -1,0 +1,13 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.aurora_editor
+  module:
+    - user
+id: user_remove_role_action.aurora_editor
+label: 'Eliminar el rol Aurora Editor a los usuarios seleccionados'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: aurora_editor
