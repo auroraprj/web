@@ -21,6 +21,15 @@ if (!isset($source)) {
 
 drush_log('source:' . $source);
 
+// prefijo de fichero a importar
+$prefix = drush_get_option('prefix');
+
+// ... si no hemos pasado parámetro --> sin prefijo
+if (!isset($prefix)) {
+  $prefix = '';
+}
+drush_log('prefix:' . $prefix);
+
 // usuario que autor de la importación
 $user = drush_get_option('user');
 
@@ -39,7 +48,7 @@ drush_log('uid:' . $uid);
 $serializer = \Drupal::service('serializer');
 
 // los nodos se encuentran en ficheros json con extendión .node
-$fnodes = glob($source . '/*.node');
+$fnodes = glob($source . '/' . $prefix . '*.node');
 
 // importamos los nodos del directorio
 foreach ($fnodes as $node_name) {

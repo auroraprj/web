@@ -3,6 +3,10 @@
 
 DEBUG='--debug'
 
+#-- usuario editor
+drush user-create editortest --password="editortest"
+drush user-add-role aurora_editor editortest
+
 #-- directorio de imágenes para tests
 images=$git/test/images
 
@@ -13,5 +17,8 @@ drush $DEBUG php-script $git/tools/drush_import_images.php --source=$images
 #-- diretorio contenido de test
 content=$git/test/content
 
-#-- cargamos nodos
-drush $DEBUG php-script $git/tools/drush_import_nodes.php --source=$content
+#-- cargamos páginas
+drush $DEBUG php-script $git/tools/drush_import_nodes.php --source=$content --prefix=page --user=admin
+
+#-- cargamos investigaciones
+drush $DEBUG php-script $git/tools/drush_import_nodes.php --source=$content --prefix=investigacion --user=editortest
