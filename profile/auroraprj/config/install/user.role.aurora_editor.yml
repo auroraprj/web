@@ -18,3 +18,8 @@ permissions:
   - 'edit own investigacion content'
   - 'revert investigacion revisions'
   - 'view investigacion revisions'
+  - 'access content overview'
+  - 'administer nodes'
+  - 'view all revisions'
+  - 'view own unpublished content'
+  - 'access content'
