@@ -9,7 +9,6 @@ permissions:
   - 'translate investigacion node'
   - 'use text format basic_html'
   - 'use text format full_html'
-  - 'use text format restricted_html'
   - 'create investigacion content'
   - 'delete any investigacion content'
   - 'delete own investigacion content'

@@ -1,0 +1,39 @@
+langcode: es
+status: true
+dependencies: {  }
+id: aurora_manager
+label: 'Aurora Manager'
+weight: 4
+is_admin: null
+permissions:
+  - 'administer content translation'
+  - 'create content translations'
+  - 'delete content translations'
+  - 'update content translations'
+  - 'translate any entity'
+  - 'translate page node'
+  - 'translate investigacion node'
+  - 'access files overview'
+  - 'use text format full_html'
+  - 'access content overview'
+  - 'administer nodes'
+  - 'view all revisions'
+  - 'view own unpublished content'
+  - 'create investigacion content'
+  - 'delete any investigacion content'
+  - 'delete own investigacion content'
+  - 'delete investigacion revisions'
+  - 'edit any investigacion content'
+  - 'edit own investigacion content'
+  - 'revert investigacion revisions'
+  - 'view investigacion revisions'
+  - 'create page content'
+  - 'delete any page content'
+  - 'delete own page content'
+  - 'delete page revisions'
+  - 'edit any page content'
+  - 'edit own page content'
+  - 'revert page revisions'
+  - 'view page revisions'
+  - 'administer url aliases'
+  - 'create url aliases'
