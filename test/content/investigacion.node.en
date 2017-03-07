@@ -15,6 +15,7 @@
     "format":"basic_html",
     "summary":"Summary of Part IV"}],
   "field_dotacion_economica":[{"value":"123456.78"}],
+  "field_id":[{"value":"TEST1"}],
   "field_image":[{
     "target_id":"1",
     "alt":"Research image",

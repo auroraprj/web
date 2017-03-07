@@ -1,0 +1,13 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.aurora_manager
+  module:
+    - user
+id: user_remove_role_action.aurora_manager
+label: 'Eliminar el rol Aurora Manager a los usuarios seleccionados'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: aurora_manager
