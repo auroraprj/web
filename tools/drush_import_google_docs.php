@@ -87,7 +87,7 @@ foreach ($investigaciones as $investigacion) {
               'type' => 'investigacion',
               'langcode' => 'es',
               'title' => $investigacion['titulo'],
-              'body' => array('value' => $investigacion['Body'], 'format' => 'restricted_html'),
+              'body' => array('value' => $investigacion['Body'], 'format' => 'basic_html'),
               'field_id' => $investigacion['id'],
               'field_dotacion_economica' => $investigacion['dotacion'],
               'uid' => $uid,
