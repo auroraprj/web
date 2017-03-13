@@ -5,18 +5,18 @@
  * Test automáticos para auroraprj
  */
 
-namespace Drupal\auroraprj\Tests;
+namespace Drupal\Tests\auroraprj\Functional;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests sobre Auroraprj
  *
  * @group auroraprj
  */
-class AuroraprjTest extends WebTestBase {
+class AuroraprjTest extends BrowserTestBase {
 
-  protected $profile = 'auroraprj';
+  protected $profile = 'minimal';
 
   /**
    * Test sobre el login

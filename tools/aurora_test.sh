@@ -1,7 +1,7 @@
 #-- entorno
 . $HOME/web/tools/aurora_env.sh
 
-cd $drupal
+cd $drupal/core
 
 #-- ejecutamos tests para auroraprj
-php core/scripts/run-tests.sh --verbose --xml /tmp auroraprj
+sudo -u daemon ../vendor/bin/phpunit --debug --group auroraprj
