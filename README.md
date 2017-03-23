@@ -32,9 +32,15 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 ### Setup
 
 - Descargamos máquina virtual bitnami con stack drupal: https://bitnami.com/stack/drupal
+- Si vas ejecutar los test automatizados con PHPUnit es necesario, al menos, 1GB de memoria para la VM
 - Nos logamos con el usuario bitnami y clonamos el Proyecto: `git clone https://github.com/auroraprj/web.git`
 - Lanzamos inicialización: `./web/tools/aurora_init.sh`.
 - No olvides tomar tona de la clave del usuario `admin` autogenerada en la instalación.
+
+### Desarrollo
+
+- Ejecución de tests PHPUnit --> `tools/aurora_test.sh`
+  - se ejecuta con usuario `daemon` mediante `sudo`
 
 ### Notas
 
