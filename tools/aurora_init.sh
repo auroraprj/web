@@ -6,12 +6,14 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
-init_bitnami=1
-reinstall=0
-init_drupal=1
+#-- opciones por defecto
+init_bitnami=1  # iniciamos bitnami VM
+init_drupal=1   # iniciamos drupal
+reinstall=0     # no es una reintalación
+envdev=1        # entorno por defecto --> desarrollo
 
-SHORT=brd
-LONG=skipbitnami,reinstall,skipdrupal
+SHORT=brdp
+LONG=skipbitnami,reinstall,skipdrupal,prod
 
 # -temporarily store output to be able to check for errors
 # -activate advanced mode getopt quoting e.g. via “--options”
@@ -41,12 +43,16 @@ while true; do
             init_drupal=0
             shift
             ;;
+        -p|--prod)
+            envdev=0
+            shift
+            ;;
         --)
             shift
             break
             ;;
         *)
-            echo "Opps! error al procesars opciones"
+            echo "Opps! error al procesar opciones"
             exit 3
             ;;
     esac
@@ -137,6 +143,20 @@ then
   #-- actualizamos las traducciones
   drush locale-update
 
+  #-- activamos entorno de desarrollo
+  if [ $envdev == 1 ]
+  then
+    #-- descargamos y activamos módulo devel
+    drush -y pm-download devel
+    drush -y pm-enable devel
+
+    #-- activamos phpunit
+    chmod +x $drupal/vendor/phpunit/phpunit/phpunit
+    sed 's/env name="SIMPLETEST_BASE_URL" value=""/env name="SIMPLETEST_BASE_URL" value="http:\/\/localhost"/' $drupal/core/phpunit.xml.dist > $drupal/core/phpunit.xml
+    chmod +r $drupal/core/phpunit.xml
+    mkdir $drupal/sites/simpletest
+    sudo chgrp daemon $drupal/sites/simpletest/
+  fi
   #-- cache
   sudo -u daemon -g daemon drush cache-rebuild
 fi
