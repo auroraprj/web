@@ -156,6 +156,10 @@ then
     chmod +r $drupal/core/phpunit.xml
     mkdir $drupal/sites/simpletest
     sudo chgrp daemon $drupal/sites/simpletest/
+
+    #-- activamos behat
+    cd $drupal
+    composer require --dev behat/behat drupal/drupal-extension:~3.0
   fi
   #-- cache
   sudo -u daemon -g daemon drush cache-rebuild

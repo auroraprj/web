@@ -3,5 +3,9 @@
 
 cd $drupal/core
 
-#-- ejecutamos tests para auroraprj (con el mismo usuario que el servidor web)
+#-- tests unitarios con PHPUnit
 sudo -u daemon ../vendor/bin/phpunit --debug --group auroraprj
+
+#-- tests funcionales con behat
+cd $git/tests/behat
+$drupal/vendor/bin/behat
