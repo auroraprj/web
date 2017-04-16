@@ -21,14 +21,4 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     {
     }
 
-    /**
-     * @Given I make a screenshot with the name :filename
-     */
-    public function iMakeAScreenshotWithTheName($filename)
-    {
-      $screenshot = $this->getSession()->getDriver()->getScreenshot();
-      $file_and_path = '/tmp/' . $filename . '.jpg';
-      file_put_contents($file_and_path, $screenshot);
-    }
-
 }

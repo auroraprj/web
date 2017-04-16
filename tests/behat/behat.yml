@@ -14,3 +14,16 @@ default:
       base_url: http://127.0.0.1/
     Drupal\DrupalExtension:
       blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+        drupal_root: '/home/bitnami/apps/drupal/htdocs'
+      region_map:
+        'Contenedor Principal': '.main-container'
+      selectors:
+        message_selector: '.alert'
+        error_message_selector: '.alert-error'
+        success_message_selector: '.alert-success'
+      text:
+        log_out: 'Cerrar sesión'
+        log_in: 'Iniciar sesión'
+        password_field: 'Contraseña'
