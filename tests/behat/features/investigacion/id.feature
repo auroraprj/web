@@ -17,7 +17,7 @@ Característica: ID de investigación es obligatorio y único
     Y        hago click en "Agregar contenido"
     Y        relleno lo siguiente:
                | Investigación | Prueba |
-               | Body | Prueba |
+               | Cuerpo| Prueba |
                | Dotación Económica | 1 |
     Y        pulso el botón "Guardar y publicar"
     Entonces debo ver "El campo Id es obligatorio"
@@ -28,7 +28,7 @@ Característica: ID de investigación es obligatorio y único
     Y        relleno lo siguiente:
                | Investigación | Prueba |
                | Id | zxcv |
-               | Body | Prueba |
+               | Cuerpo | Prueba |
                | Dotación Económica | 1 |
              # notar que el Id es repetido en Antecedentes
     Y        pulso el botón "Guardar y publicar"
