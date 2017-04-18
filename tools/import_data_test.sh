@@ -4,10 +4,10 @@
 DEBUG='--debug'
 
 #-- directorio de imágenes para tests
-images=$git/test/images
+images=$git/tests/images
 
 #-- diretorio contenido de test
-content=$git/test/content
+content=$git/tests/content
 
 cd $drupal
 
