@@ -21,13 +21,17 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 
 - Reutilizable: intentamos que todo el proyecto pueda ser reutilizado en otros ámbitos.
 - Consiste en:
- - un CMS (drupal).
- - un conjunto de módulos estandars de drupal.
- - un conjunto de módulos específicos para auroraprj (en el futuro).
- - un aspecto o theme (actualmente Bootstrap).
- - un profile de instalación drupal que empaqueta todo el conjunto y permite una instalación homogenea.
+  - un CMS (drupal).
+  - un conjunto de módulos estandars de drupal.
+  - un conjunto de módulos específicos para auroraprj (en el futuro).
+  - un aspecto o theme (actualmente Bootstrap).
+  - un profile de instalación drupal que empaqueta todo el conjunto y permite una instalación homogenea.
 - web:
- - Soporte multidioma.
+  - Soporte multidioma.
+- Desarrollo:
+  - Tests unitarios con PHPUnit
+  - Tests funcionales con Behat
+  - instala módulo `devel`
 
 ### Setup
 
@@ -36,11 +40,14 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 - Nos logamos con el usuario bitnami y clonamos el Proyecto: `git clone https://github.com/auroraprj/web.git`
 - Lanzamos inicialización: `./web/tools/aurora_init.sh`.
 - No olvides tomar tona de la clave del usuario `admin` autogenerada en la instalación.
+- Por defecto, se hace la instalación de un entorno de Desarrollo. Use la opción `--prod` para la instalación de un entorno de Producción.
 
 ### Desarrollo
 
-- Ejecución de tests PHPUnit --> `tools/aurora_test.sh`
-  - se ejecuta con usuario `daemon` mediante `sudo`
+- Ejecución de tests unitarios PHPUnit y funcionales con behat
+  - los tests se ejecutan con `tools/aurora_test.sh`
+  - por defecto sólo se ejecutan los tests funcionales
+  - los tests con PHPUnit se ejecutan con usuario `daemon` mediante `sudo`
 
 ### Notas
 
@@ -59,8 +66,9 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 ### Directorios
 
 - `media` --> Elementos multimedia necesarios en la instalación.
-- `test/content` --> Contenido para test.
-- `test/images` --> Imágenes para test.
+- `tests/content` --> Contenido para test.
+- `tests/images` --> Imágenes para test.
+- `tests/behat` --> Tests funcionales
 - `tools` --> Herramientas para manejo de la instalación: inicialización, exportación, migración, etc.
 - `profile/auroraprj` --> Profile de instalación del site.
 - `profile/auroraprj/config/install` --> Configuración inicial.
