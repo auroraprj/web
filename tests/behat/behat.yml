@@ -21,7 +21,8 @@ default:
         'Contenedor Principal': '.main-container'
       selectors:
         message_selector: '.alert'
-        error_message_selector: '.alert-error'
+        error_message_selector: '.alert-danger'
+        warning_message_selector: '.messages.warning'
         success_message_selector: '.alert-success'
       text:
         log_out: 'Cerrar sesión'

@@ -20,7 +20,7 @@ Característica: ID de investigación es obligatorio y único
                | Cuerpo| Prueba |
                | Dotación Económica | 1 |
     Y        pulso el botón "Guardar y publicar"
-    Entonces debo ver "El campo Id es obligatorio"
+    Entonces debo ver un mensaje de error "El campo Id es obligatorio"
 
   Escenario: El ID de investigación debe ser único
     Cuando   voy a la página de inicio
@@ -32,4 +32,4 @@ Característica: ID de investigación es obligatorio y único
                | Dotación Económica | 1 |
              # notar que el Id es repetido en Antecedentes
     Y        pulso el botón "Guardar y publicar"
-    Entonces debo ver "Ya existe un content con id zxcv"
+    Entonces debo ver un mensaje de error "Ya existe un content con id zxcv"
