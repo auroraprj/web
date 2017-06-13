@@ -156,10 +156,6 @@ then
 
     #-- activamos drupal-extension
     composer require --dev drupal/drupal-extension:~3.0
-
-    #-- aplicamos parche a drupal-extension (ver pull-request #369 de drupal-extension)
-    cd $drupal/vendor/drupal/drupal-extension
-    curl https://patch-diff.githubusercontent.com/raw/jhedstrom/drupalextension/pull/369.diff | patch -p1 --forward
   fi
 
   #-- actualizamos las traducciones
