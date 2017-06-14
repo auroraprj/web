@@ -64,8 +64,9 @@ done
 if [ $init_bitnami == 1 ]
 then
   #-- activamos ssh
-  sudo mv /etc/init/ssh.conf.back /etc/init/ssh.conf
-  sudo start ssh
+  sudo rm -f /etc/ssh/sshd_not_to_be_run
+  sudo systemctl enable ssh
+  sudo systemctl start ssh
 
   #-- eliminamos banner de bitnami
   sudo /opt/bitnami/apps/drupal/bnconfig --disable_banner 1
@@ -118,6 +119,9 @@ then
   cp $git/media/logo_aurora_grises_80.png sites/default/files
 
   #-- acciones post-instalación
+
+  #-- activamos tema aurora_theme
+  drush -y pm-enable aurora_theme
 
   #-- nombre del sitio
   drush -y config-set system.site name Auroraprj
