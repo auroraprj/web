@@ -120,8 +120,10 @@ then
 
   #-- acciones post-instalación
 
-  #-- activamos tema aurora_theme
+  #-- activamos tema aurora_theme y lo activamos como tema por defecto
   drush -y pm-enable aurora_theme
+  drush -y config-set system.theme default aurora_theme
+
 
   #-- nombre del sitio
   drush -y config-set system.site name Auroraprj
