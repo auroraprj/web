@@ -178,45 +178,45 @@
   </div>
 {% endblock %}
 
-{% if page.pie1 or page.pie2 or page.pie3 %}
+{% if page.pie1 or page.pie2 or page.pie3 or page.footer %}
   <footer class="footer {{ container }}" role="contentinfo">
+    <div class="row">
+      {# Pie1 #}
+      {% if page.pie1 %}
+        {% block pie1 %}
+          <div class="col-sm-6">
+            {{ page.pie1 }}
+          </div>
+        {% endblock %}
+      {% endif %}
 
-  {# Pie1 #}
-  {% if page.pie1 %}
-    {% block pie1 %}
-      <aside class="col-sm-6" role="complementary">
-        {{ page.pie1 }}
-      </aside>
-    {% endblock %}
-  {% endif %}
+      {# Pie2 #}
+      {% if page.pie2 %}
+        {% block pie2 %}
+          <div class="col-sm-3">
+            {{ page.pie2 }}
+          </div>
+        {% endblock %}
+      {% endif %}
 
-  {# Pie2 #}
-  {% if page.pie2 %}
-    {% block pie2 %}
-      <aside class="col-sm-3" role="complementary">
-        {{ page.pie2 }}
-      </aside>
-    {% endblock %}
-  {% endif %}
+      {# Pie3 #}
+      {% if page.pie3 %}
+        {% block pie3 %}
+          <div class="col-sm-3">
+            {{ page.pie3 }}
+          </div>
+        {% endblock %}
+      {% endif %}
+    </div>  
 
-  {# Pie3 #}
-  {% if page.pie3 %}
-    {% block pie3 %}
-      <aside class="col-sm-3" role="complementary">
-        {{ page.pie3 }}
-      </aside>
-    {% endblock %}
-  {% endif %}
-
-  </footer>
-{% endif %}
-
-{% if page.footer %}
-  <footer class="footer {{ container }}" role="contentinfo">
-  {% if page.footer %}
-    {% block footer %}
-      {{ page.footer }}
-    {% endblock %}
-  {% endif %}
+    <div class="row">
+      {% if page.footer %}
+          {% block footer %}
+            <div class="col-sm-12">
+              {{ page.footer }}
+            </div>
+          {% endblock %}
+      {% endif %}
+    </div>
   </footer>
 {% endif %}
