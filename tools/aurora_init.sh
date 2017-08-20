@@ -115,9 +115,6 @@ then
   #-- instalamos el site auroraprj
   drush -y site-install auroraprj
 
-  #-- copiamos logo que se usa en theme
-  cp $git/media/logo_aurora_grises_80.png sites/default/files
-
   #-- acciones post-instalación
 
   #-- activamos tema aurora_theme y lo activamos como tema por defecto
