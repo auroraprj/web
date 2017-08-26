@@ -86,9 +86,7 @@
 
       {# Navigation (collapsible) #}
       {% if page.navigation_collapsible %}
-        <div id="navbar-collapse" class="navbar-collapse collapse">
-          {{ page.navigation_collapsible }}
-        </div>
+        {{ page.navigation_collapsible }}
       {% endif %}
       {% if not navbar_attributes.hasClass(container) %}
         </div>
