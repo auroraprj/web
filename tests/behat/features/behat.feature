@@ -1,7 +1,7 @@
 # language: es
-Característica: Test funcional en drupal con behat
+Característica: Test de funcinamiento mínimo de behat con drupal
   Para comprobar que behat funciona con drupal
-  Como usuario no anónimo
+  Como usuario anónimo
   Debo poder visitar la página inicial
 
   Antecedentes:
@@ -11,4 +11,3 @@ Característica: Test funcional en drupal con behat
     Cuando voy a la página de inicio
   Entonces debo obtener una respuesta HTTP código 200
          Y no debo obtener una respuesta HTTP código 400
-         Y debo ver "Auroraprj"
