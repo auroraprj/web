@@ -14,7 +14,7 @@ Característica: Menú de usuario, menú de herramienta y caja de búsqueda mini
   Escenario: Visualizar la caja de búsqueda en zona de navegación plegable
     Dado que soy un usuario anónimo
     Cuando voy a la página de inicio
-    Entonces debo ver el icono "glyphicon-user" en la zona "Navegación plegable"
+    Entonces debo ver el icono "glyphicon-search" en la zona "Navegación plegable"
       Y debo ver "Search" en la zona "Navegación plegable"
 
   Escenario: Visualizar el menú de usuario en la zona de navegación plegable
