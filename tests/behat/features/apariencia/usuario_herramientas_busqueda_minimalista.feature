@@ -8,23 +8,24 @@ Característica: Menú de usuario, menú de herramienta y caja de búsqueda mini
   * Debo ver el menú de usuario en la zona de navegación plegable
   * Debo ver la caja de búsqueda en la zona de navegación plegable
 
-  Como usuario autenticado
+  Como usuario con el rol de editor
   * Debo ver el menú de herramientas en la zona de navegación plegable
 
   Escenario: Visualizar la caja de búsqueda en zona de navegación plegable
     Dado que soy un usuario anónimo
     Cuando voy a la página de inicio
-    Entonces debo ver el campo "Search" en la zona "Navegación plegable"
-      Y I should see the "span" element with the "class" attribute set to "glyphicon-search" in the "Navegación plegable" region
+    Entonces debo ver el icono "glyphicon-user" en la zona "Navegación plegable"
+      Y debo ver "Search" en la zona "Navegación plegable"
 
   Escenario: Visualizar el menú de usuario en la zona de navegación plegable
     Dado que soy un usuario anónimo
     Cuando voy a la página de inicio
     Entonces debo ver el icono "glyphicon-user" en la zona "Navegación plegable"
-      Y debo ver opción de menú "Inicar sessión" en la zona "Navegación plegable"
+      Y debo ver el enlace "Iniciar sesión" en la zona "Navegación plegable"
 
+@api
   Escenario: Visualizar el menú de herramientas en la zona de navegación plegable
-    Dado que soy un usuario autenticado
+    Dado que estoy conectado como usuario con rol "aurora_editor"
     Cuando voy a la página de inicio
     Entonces debo ver el icono "glyphicon-wrench" en la zona "Navegación plegable"
-      Y debo ver opción de menú "Agregar contenido" en la zona "Navegación plegable"
+      Y debo ver el enlace "Agregar contenido" en la zona "Navegación plegable"
