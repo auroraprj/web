@@ -39,7 +39,7 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 - Si vas ejecutar los test automatizados con PHPUnit es necesario, al menos, 1GB de memoria para la VM
 - Nos logamos con el usuario bitnami y clonamos el Proyecto: `git clone https://github.com/auroraprj/web.git`
 - Lanzamos inicialización: `./web/tools/aurora_init.sh`.
-- No olvides tomar tona de la clave del usuario `admin` autogenerada en la instalación.
+- No olvides tomar tona de la clave del usuario `admin` autogenerada en la instalación o cambiarla después.
 - Por defecto, se hace la instalación de un entorno de Desarrollo. Use la opción `--prod` para la instalación de un entorno de Producción.
 
 ### Desarrollo
@@ -67,8 +67,9 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
 
 - `media` --> Elementos multimedia necesarios en la instalación.
 - `tests/content` --> Contenido para test.
-- `tests/images` --> Imágenes para test.
+- `tests/images` --> Imágenes para contenido de test.
 - `tests/behat` --> Tests funcionales
 - `tools` --> Herramientas para manejo de la instalación: inicialización, exportación, migración, etc.
 - `profile/auroraprj` --> Profile de instalación del site.
 - `profile/auroraprj/config/install` --> Configuración inicial.
+- `profile/auroraprj/themes/aurora_theme` --> Aspecto propio basado en 'Bootstrap'
