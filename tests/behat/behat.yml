@@ -7,6 +7,7 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MarkupContext
   extensions:
     Behat\MinkExtension:
       goutte: ~
@@ -19,6 +20,7 @@ default:
         drupal_root: '/home/bitnami/apps/drupal/htdocs'
       region_map:
         'Contenedor Principal': '.main-container'
+        'Navegación plegable': '.navbar-collapse'
       selectors:
         message_selector: '.alert'
         error_message_selector: '.alert-danger'

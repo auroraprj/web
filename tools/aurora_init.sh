@@ -64,8 +64,9 @@ done
 if [ $init_bitnami == 1 ]
 then
   #-- activamos ssh
-  sudo mv /etc/init/ssh.conf.back /etc/init/ssh.conf
-  sudo start ssh
+  sudo rm -f /etc/ssh/sshd_not_to_be_run
+  sudo systemctl enable ssh
+  sudo systemctl start ssh
 
   #-- eliminamos banner de bitnami
   sudo /opt/bitnami/apps/drupal/bnconfig --disable_banner 1
@@ -114,10 +115,12 @@ then
   #-- instalamos el site auroraprj
   drush -y site-install auroraprj
 
-  #-- copiamos logo que se usa en theme
-  cp $git/media/logo_aurora_grises_80.png sites/default/files
-
   #-- acciones post-instalación
+
+  #-- activamos tema aurora_theme y lo activamos como tema por defecto
+  drush -y pm-enable aurora_theme
+  drush -y config-set system.theme default aurora_theme
+
 
   #-- nombre del sitio
   drush -y config-set system.site name Auroraprj
@@ -157,9 +160,10 @@ then
     #-- activamos drupal-extension
     composer require --dev drupal/drupal-extension:~3.0
 
-    #-- aplicamos parche a drupal-extension (ver pull-request #369 de drupal-extension)
+    #-- aplicamos parche a drupal-extension (ver pull-request #407 de drupal-extension)
     cd $drupal/vendor/drupal/drupal-extension
-    curl https://patch-diff.githubusercontent.com/raw/jhedstrom/drupalextension/pull/369.diff | patch -p1 --forward
+    curl https://patch-diff.githubusercontent.com/raw/jhedstrom/drupalextension/pull/407.diff | patch -p1 --forward
+
   fi
 
   #-- actualizamos las traducciones
