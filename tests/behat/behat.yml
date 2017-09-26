@@ -1,0 +1,32 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2: ~
+      base_url: http://127.0.0.1/
+    Drupal\DrupalExtension:
+      blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+        drupal_root: '/home/bitnami/apps/drupal/htdocs'
+      region_map:
+        'Contenedor Principal': '.main-container'
+        'Navegación plegable': '.navbar-collapse'
+      selectors:
+        message_selector: '.alert'
+        error_message_selector: '.alert-danger'
+        warning_message_selector: '.messages.warning'
+        success_message_selector: '.alert-success'
+      text:
+        log_out: 'Cerrar sesión'
+        log_in: 'Iniciar sesión'
+        password_field: 'Contraseña'

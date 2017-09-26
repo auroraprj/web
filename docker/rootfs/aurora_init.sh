@@ -48,9 +48,6 @@ while true; do
     esac
 done
 
-#-- entorno
-. /aurora_env.sh
-
 echo "branch: $branch"
 echo "pull: $pull"
 
@@ -76,7 +73,7 @@ drush -y pm-download bootstrap
 drush -y pm-download restui
 
 #-- necesario para instalación
-#-- creo que no es necesario --> chmod u+w ./sites/default/settings.php
+chmod u+w ./sites/default/settings.php
 
 #-- instalamos el site auroraprj
 drush -y site-install auroraprj
