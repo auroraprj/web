@@ -9,8 +9,10 @@ check_for_updates &
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   nami_initialize apache php drupal
-  info "Inciando Auroraprj... "
-  /aurora_init.sh
+  
+  [[ ! -d /bitnami/profiles ]] && mkdir /bitnami/profiles
+  [[ ! -L /opt/bitnami/drupal/profiles ]] && rm -fR /opt/bitnami/drupal/profiles &&  ln -s /bitnami/profiles /opt/bitnami/drupal/profiles
+
   info "Starting drupal... "
 fi
 

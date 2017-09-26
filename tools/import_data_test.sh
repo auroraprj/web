@@ -1,13 +1,15 @@
-#-- entorno
-. $HOME/web/tools/aurora_env.sh
+#!/bin/bash
+
+#-- configuración
+set -o allexport; source /aurora.conf; set +o allexport
 
 DEBUG='--debug'
 
 #-- directorio de imágenes para tests
-images=$git/tests/images
+images=$auroraprj/tests/images
 
 #-- diretorio contenido de test
-content=$git/tests/content
+content=$auroraprj/tests/content
 
 cd $drupal
 
@@ -20,10 +22,10 @@ drush user-create editortest --password="editortest"
 drush user-add-role aurora_editor editortest
 
 #-- cargamos imágenes
-drush $DEBUG php-script $git/tools/drush_import_images.php --source=$images
+drush $DEBUG php-script $auroraprj/tools/drush_import_images.php --source=$images
 
 #-- cargamos páginas
-drush $DEBUG php-script $git/tools/drush_import_nodes.php --source=$content --prefix=page --user=managertest
+drush $DEBUG php-script $auroraprj/tools/drush_import_nodes.php --source=$content --prefix=page --user=managertest
 
 #-- cargamos investigaciones
-drush $DEBUG php-script $git/tools/drush_import_nodes.php --source=$content --prefix=investigacion --user=editortest
+drush $DEBUG php-script $auroraprj/tools/drush_import_nodes.php --source=$content --prefix=investigacion --user=editortest

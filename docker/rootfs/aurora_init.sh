@@ -1,16 +1,17 @@
 #!/bin/bash
 
+#-- configuración
+set -o allexport; source /aurora.conf; set +o allexport
+
+#-- comprobación de parámetros
 getopt --test > /dev/null
 if [[ $? -ne 4 ]]; then
     echo "opss!! `getopt --test` failed in this environment"
     exit 1
 fi
 
-#-- opciones por defecto
-reinstall=0     # no es una reintalación
-
-SHORT=r
-LONG=reinstall
+SHORT=nb:
+LONG=nopull,branch:
 
 # -temporarily store output to be able to check for errors
 # -activate advanced mode getopt quoting e.g. via “--options”
@@ -28,9 +29,13 @@ eval set -- "$PARSED"
 # now enjoy the options in order and nicely split until we see --
 while true; do
     case "$1" in
-        -r|--reinstall)
-            reinstall=1
+        -n|--nopull)
+            pull=0
             shift
+            ;;
+        -b|--branch)
+            branch=$2
+            shift 2
             ;;
         --)
             shift
@@ -46,16 +51,23 @@ done
 #-- entorno
 . /aurora_env.sh
 
-#-- vamos con drupal. Usaremos drush para operar
-cd $drupal
+echo "branch: $branch"
+echo "pull: $pull"
 
-if [ $reinstall == 1 ]
-then
-  rm -R $drupal/profiles/auroraprj/
+#-- sincronizar con github si es necesario
+if (( $pull )); then
+  #-- sincronizar
+  /aurora_git.sh --branch $branch
+
+  #-- borramos previamente por si se trata de una reinstalación
+  rm -fR $drupal/profiles/auroraprj/
+
+  #-- copiamos profile
+  cp -R $auroraprj/profile/auroraprj $drupal/profiles/
 fi
 
-#-- copiamos profile
-cp -R /opt/auroraprj $drupal/profiles/
+#-- vamos con drupal. Usaremos drush para operar
+cd $drupal
 
 #-- descargamos Bootstrap theme
 drush -y pm-download bootstrap
@@ -64,7 +76,7 @@ drush -y pm-download bootstrap
 drush -y pm-download restui
 
 #-- necesario para instalación
-chmod u+w ./sites/default/settings.php
+#-- creo que no es necesario --> chmod u+w ./sites/default/settings.php
 
 #-- instalamos el site auroraprj
 drush -y site-install auroraprj
@@ -92,18 +104,6 @@ drush -y config-set system.date first_day 1
 
 #-- Zona horaria de Madrid
 drush -y config-set system.date timezone.default 'Europe/Madrid'
-
-#-- activamos entorno de desarrollo
-
-#-- activamos behat
-composer require --dev behat/behat
-
-#-- activamos drupal-extension
-composer require --dev drupal/drupal-extension:~3.0
-
-#-- aplicamos parche a drupal-extension (ver pull-request #407 de drupal-extension)
-cd $drupal/vendor/drupal/drupal-extension
-curl https://patch-diff.githubusercontent.com/raw/jhedstrom/drupalextension/pull/407.diff | patch -p1 --forward
 
 #-- actualizamos las traducciones
 drush locale-update
