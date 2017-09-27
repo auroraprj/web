@@ -9,3 +9,6 @@ cd $drupal
 
 #-- cargamos investigaciones del Catálogo de investigaciones en Cáncer Infantil
 drush $DEBUG php-script $auroraprj/tools/drush_import_google_docs.php --user=editortest
+
+#-- ejecutamos el cron --> reindexamos
+drush cron
