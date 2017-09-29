@@ -50,6 +50,12 @@ done
 
 echo "branch: $branch"
 echo "pull: $pull"
+#-- esperamos si dupral no está listo
+while [ -f /stop.drupal_not_ready ]
+do
+  echo "drupal no listo... esperamos"
+  sleep 4
+done
 
 #-- sincronizar con github si es necesario
 if (( $pull )); then

@@ -7,7 +7,6 @@ script:
   - docker build -t auroraprj/auroraprj .
   - cd ..
   - docker-compose up -d
-  - wait 20
   - docker-compose exec drupal /aurora_init.sh --branch $TRAVIS_BRANCH
   - docker-compose exec drupal /aurora_test.sh --branch $TRAVIS_BRANCH
 
