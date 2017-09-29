@@ -44,11 +44,11 @@ while true; do
     esac
 done
 
-#-- clonamos el repositorio git
+#-- clonamos el repositorio git si no existe
 [[ ! -d $auroraprj ]] && git clone $origin $auroraprj
 
-#-- branch desado
-git -C $auroraprj checkout $branch
+#-- descargamos objetos nuevos
+git -C $auroraprj fetch -v
 
-#-- pull
-(( $pull )) && git -C $auroraprj pull
+#-- branch/commit desado
+git -C $auroraprj checkout $branch

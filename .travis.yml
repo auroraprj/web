@@ -7,8 +7,8 @@ script:
   - docker build -t auroraprj/auroraprj .
   - cd ..
   - docker-compose up -d
-  - docker-compose exec drupal /aurora_init.sh --branch $TRAVIS_BRANCH
-  - docker-compose exec drupal /aurora_test.sh --branch $TRAVIS_BRANCH
+  - docker-compose exec drupal /aurora_init.sh --branch $TRAVIS_COMMIT
+  - docker-compose exec drupal /aurora_test.sh --branch $TRAVIS_COMMIT
 
 notifications:
   email:
