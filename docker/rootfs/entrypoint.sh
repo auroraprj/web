@@ -10,10 +10,10 @@ print_welcome_page
 check_for_updates &
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-  nami_initialize apache php drupal
-
+  echo "repongo profiles"
   [[ ! -d /bitnami/profiles ]] && mkdir /bitnami/profiles
   [[ ! -L /opt/bitnami/drupal/profiles ]] && rm -fR /opt/bitnami/drupal/profiles &&  ln -s /bitnami/profiles /opt/bitnami/drupal/profiles
+  nami_initialize apache php drupal
 
   info "Starting drupal... "
 fi
