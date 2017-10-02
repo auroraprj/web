@@ -17,7 +17,7 @@ default:
       blackbox: ~
       api_driver: 'drupal'
       drupal:
-        drupal_root: '/home/bitnami/apps/drupal/htdocs'
+        drupal_root: '/opt/bitnami/drupal'
       region_map:
         'Contenedor Principal': '.main-container'
         'Navegación plegable': '.navbar-collapse'
@@ -29,4 +29,5 @@ default:
       text:
         log_out: 'Cerrar sesión'
         log_in: 'Iniciar sesión'
+        username_field: 'Nombre de usuario'
         password_field: 'Contraseña'

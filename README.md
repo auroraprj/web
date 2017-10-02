@@ -1,61 +1,50 @@
 # auroraprj/web
 
-El objetivo principal de este proyecto es dar soporte en la web al Catálogo de Investigaciones en Cáncer Infantil.
+El objetivo principal de este proyecto es dar soporte en la web al [Catálogo de Investigaciones en Cáncer Infantil](https://docs.google.com/document/d/1O6cydj9mqU4tgZ-SgSe890RWecnJTQBVGxsJZ3EwgUs/edit?usp=sharing).
 
 El site contendrá:
 * El propio Catálogo de investigaciones en Cáncer Infantil.
 * Blog.
 
-Por comodidad, de momento nos basamos en drupal sobre máquinas bitnami. El stack
-drupal de bitnami incluye todo lo necesario:
-- LAMP sobre linux Ubuntu
-- composer
-- drupal
-- git
-- drush
-
-En fases posteriores el proyecto quedará empaquetado y listo para ser instalado
-en otros entornos mediante `composer` (por ejemplo en Docker).
+Nos basamos en drupal sobre imágenes docker de bitnami.
 
 ### Características
 
 - Reutilizable: intentamos que todo el proyecto pueda ser reutilizado en otros ámbitos.
 - Consiste en:
-  - un CMS (drupal).
+  - un framework (drupal).
+  - una Base de Datos (mariaDB).
   - un conjunto de módulos estandars de drupal.
   - un conjunto de módulos específicos para auroraprj (en el futuro).
-  - un aspecto o theme (actualmente Bootstrap).
+  - un aspecto o theme (actualmente basado en Bootstrap).
   - un profile de instalación drupal que empaqueta todo el conjunto y permite una instalación homogenea.
 - web:
   - Soporte multidioma.
 - Desarrollo:
-  - Tests unitarios con PHPUnit
   - Tests funcionales con Behat
-  - instala módulo `devel`
+
+### Requisitos de instalación
+
+- Docker instalado
 
 ### Setup
 
-- Descargamos máquina virtual bitnami con stack drupal: https://bitnami.com/stack/drupal
-- Si vas ejecutar los test automatizados con PHPUnit es necesario, al menos, 1GB de memoria para la VM
-- Nos logamos con el usuario bitnami y clonamos el Proyecto: `git clone https://github.com/auroraprj/web.git`
-- Lanzamos inicialización: `./web/tools/aurora_init.sh`.
+- Iniciamos mariaDB + drupal:
+```
+docker-compose up -d
+```
+- Inciamos auroraprj
+```
+docker-compose exec drupal /aurora_init.sh [--branch rama]
+```
 - No olvides tomar tona de la clave del usuario `admin` autogenerada en la instalación o cambiarla después.
-- Por defecto, se hace la instalación de un entorno de Desarrollo. Use la opción `--prod` para la instalación de un entorno de Producción.
 
 ### Desarrollo
 
-- Ejecución de tests unitarios PHPUnit y funcionales con behat
-  - los tests se ejecutan con `tools/aurora_test.sh`
-  - por defecto sólo se ejecutan los tests funcionales
-  - los tests con PHPUnit se ejecutan con usuario `daemon` mediante `sudo`
-
-### Notas
-
-- Asumimos que la clonación se hace en el directorio `$HOME/web`
-- El proceso aurora_init.sh:
- - pedirá clave dado que algunas acciones necesita ejecución con privilegios de root (`sudo`).
- - activa el servicio `ssh`. Por favor, téngalo en cuenta a efectos de seguridad.
- - activa la variable `always_populate_raw_post_data=-1` en `php.ini` dado que el módulo `rest` lo necesita.
+- Ejecución de tests funcionales con behat
+```
+docker-compose exec drupal /aurora_test.sh [--branch rama]
+```
 
 ### Contenido para tests
 
@@ -63,13 +52,17 @@ en otros entornos mediante `composer` (por ejemplo en Docker).
  - Página con todos los elementos disponibles.
  - Investigación.
 
+### Notas
+
+- Script para la importación de datos del catálogo dede google Docs `tools/import_google_docs.sh`.
+
 ### Directorios
 
 - `media` --> Elementos multimedia necesarios en la instalación.
 - `tests/content` --> Contenido para test.
 - `tests/images` --> Imágenes para contenido de test.
 - `tests/behat` --> Tests funcionales
-- `tools` --> Herramientas para manejo de la instalación: inicialización, exportación, migración, etc.
+- `tools` --> Herramientas
 - `profile/auroraprj` --> Profile de instalación del site.
 - `profile/auroraprj/config/install` --> Configuración inicial.
 - `profile/auroraprj/themes/aurora_theme` --> Aspecto propio basado en 'Bootstrap'

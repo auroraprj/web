@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mariadb_data:/bitnami'
+  drupal:
+    image: 'auroraprj/auroraprj:latest'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - 'drupal_data:/bitnami'
+      - 'aurora_tests:/tests'
+      - 'aurora_config:/config'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  drupal_data:
+    driver: local
+  aurora_tests:
+    driver: local
+  aurora_config:
+    driver: local
