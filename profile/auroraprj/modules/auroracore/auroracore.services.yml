@@ -1,0 +1,5 @@
+services:
+  # Define el servicio InvestigacionManager
+  auroracore.investigacion_manager:
+    class: Drupal\auroracore\InvestigacionManager
+    arguments: ['@entity.query', '@entity_type.manager']
