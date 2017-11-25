@@ -7,7 +7,6 @@ touch /stop.drupal_not_ready
 . /opt/bitnami/base/helpers
 
 print_welcome_page
-check_for_updates &
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   echo "repongo profiles"

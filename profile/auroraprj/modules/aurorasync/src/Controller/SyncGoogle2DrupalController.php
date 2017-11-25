@@ -17,13 +17,6 @@ use Drupal\auroracore\InvestigacionManager;
  */
 class SyncGoogle2DrupalController extends ControllerBase {
 
-  // URL de ubicación de la hoja de cálculo en Google Docs
-  protected $url = "https://spreadsheets.google.com/feeds/cells/1kZvBbrfUTGRyAkF5BueY1pedNiT_UkVdIrB6EQwmB_I/1/public/basic?alt=json";
-
-  protected $reader;
-
-  protected $hoja;
-
   protected $investigacionManager;
   protected $userStorage;
 
@@ -45,50 +38,69 @@ class SyncGoogle2DrupalController extends ControllerBase {
     $this->userStorage = $this->entityManager()->getStorage('user');
   }
 
-  public function google2Drupal() {
+  public function google2Drupal( $url ) {
 
     $markup = '<h3>Resultado</h3>';
+    $markup .= '<ul>';
 
-    $this->reader = new GoogleDocReader;
-    $this->reader->setURL($this->url);
-    $this->reader->read();
-    $this->hoja = $this->reader->getArrayHojaCalculo();
+    // Google Doc reader
+    $reader = new GoogleDocReader($url);
 
-    foreach ($this->hoja as $fila => $value) {
+    // leemos la hoja de cálculo
+    $hoja = $reader->read();
+
+    // recorremos cada fila de la hoja de Cálculo
+    foreach ($hoja as $fila => $value) {
+
       // saltamos la primera fila que es de títulos y actuamos sobre las filas que tenga ID de investigaición
       if ($fila > 1 && isset($value['B'])) {
+
+        $m = '';
+
+        // adaptador de investigación sobre Google Docs
         $adaptador = new GoogleDocAdapter($value);
 
+        // adaptador sobre nodo en Drupal con el mismo ID (si no existe, lo crea)
         $nodeAdaptador = new NodeAdapter( $this->investigacionManager->loadOrCreateByFieldId($adaptador->getId()) );
 
+        // si no se iguales, copiamos el contenido de Google Docs en Drupal
         if(!$adaptador->igual($nodeAdaptador)) {
 
-          $nodeAdaptador->getNode()->set('title', $adaptador->getTitulo());
-          $nodeAdaptador->getNode()->set('field_dotacion_economica', $adaptador->getDotacion());
-          $nodeAdaptador->getNode()->set('body', array('value' => $adaptador->getBody(), 'format' => 'basic_html'));
+          $nodeAdaptador->nuevaRevision( $this->currentUser() );
 
-          $nodeAdaptador->getNode()->setNewRevision();
-          $nodeAdaptador->getNode()->setRevisionUserId($this->currentUser()->id());
-          $nodeAdaptador->getNode()->setRevisionLogMessage('Actualizado por SyncGoogle2DrupalController');
+          $nodeAdaptador->setTitulo( $adaptador->getTitulo() );
+          $nodeAdaptador->setDotacion( $adaptador->getDotacion() );
+          $nodeAdaptador->setBody( $adaptador->getBody() );
 
           // validamos el nodo
-          $violations = $nodeAdaptador->getNode()->validate();
+          $violations = $nodeAdaptador->validate();
 
-          // informamos de los problemas
+          // algún problema?
           if ($violations->count() > 0) {
+            $m .= '<ul>';
+            // informamos de los problemas
             foreach ($violations as $violation) {
-              $markup .= '<p>OPSS!! ' . $violation->getPropertyPath() . $violation->getMessage() . '</p>';
+              $m .= '<li>OPSS!! ' . $violation->getPropertyPath() . $violation->getMessage() . '</li>';
             }
+            $m .= '</ul>';
           }
           else {
             // todo OK. Grabamos!
-            $nodeAdaptador->getNode()->save();
-            $markup .= '<p>Actualizado node: ' . $adaptador->getId() . '</p>';
+            $nodeAdaptador->save();
+            $m .= ' <strong>Actualizado</strong>';
           }
         }
+
+        $markup .= '<li>';
+        $markup .= $nodeAdaptador->toLink( 'node: ' . $nodeAdaptador->getId() )->toString();
+        $markup .= $m;
+        $markup .= '</li>';
       }
     }
+
+    $markup .= '</ul>';
     $markup .= '<p><strong>Fin de actualización</strong></p>';
+
     return $markup;
   }
 
@@ -96,7 +108,18 @@ class SyncGoogle2DrupalController extends ControllerBase {
    * {@inheritdoc}
    */
   public function content() {
-    return array('#markup' => $this->google2Drupal(), );
+    // URL de ubicación de la hoja de cálculo en Google Docs
+    $url = "https://spreadsheets.google.com/feeds/cells/1kZvBbrfUTGRyAkF5BueY1pedNiT_UkVdIrB6EQwmB_I/1/public/basic?alt=json";
+    return array('#markup' => $this->google2Drupal( $url ), );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function contentTest() {
+    // URL de ubicación de la hoja de cálculo patrón en Google Docs
+    $urlPatron = "https://spreadsheets.google.com/feeds/cells/143Rg2t8hwOdJCkx8SKO-1s_G39NegsIdV6izr0ev2L0/1/public/basic?alt=json";
+    return array('#markup' => $this->google2Drupal( $urlPatron ), );
   }
 
 }

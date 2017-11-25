@@ -5,3 +5,10 @@ aurorasync.content:
     _title: 'Sincronizar GoogleDoc --> Drupal'
   requirements:
     _permission: 'edit any investigacion content'
+aurorasync.contentTest:
+  path: '/syncGoogle2DrupalTest'
+  defaults:
+    _controller: 'Drupal\aurorasync\Controller\SyncGoogle2DrupalController::contentTest'
+    _title: 'Sincronizar GoogleDoc --> Drupal (Test)'
+  requirements:
+    _permission: 'edit any investigacion content'

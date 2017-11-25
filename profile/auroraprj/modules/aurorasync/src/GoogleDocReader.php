@@ -8,11 +8,15 @@ namespace Drupal\aurorasync;
  */
 class GoogleDocReader {
 
-  // URL en el que se ubica la hoja de cálculo de Google Docs
-  protected $url;
+  protected $url;             // URL en el que se ubica la hoja de cálculo de Google Docs
+  protected $hoja = array();  // celdas de la hoja de cálculo en array de filas / columnas
 
-  // celdas de la hoja de cálculo en array de filas / columnas
-  protected $hoja = array();
+  /**
+  * Constructor
+  */
+  public function __construct($url) {
+    $this->setURL($url);
+  }
 
   /**
    * Establece la URL en la que se ubica la Hoja de Cálculo a leer
@@ -40,6 +44,9 @@ class GoogleDocReader {
 
       $this->hoja[$fila][$col] = $contenido;
     }
+
+    // retornamos la hoja de cálculo leida
+    return( $this->getArrayHojaCalculo() );
   }
 
   /**

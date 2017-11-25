@@ -20,6 +20,7 @@ default:
         drupal_root: '/opt/bitnami/drupal'
       region_map:
         'Contenedor Principal': '.main-container'
+        'Navegación': '.navbar'
         'Navegación plegable': '.navbar-collapse'
       selectors:
         message_selector: '.alert'

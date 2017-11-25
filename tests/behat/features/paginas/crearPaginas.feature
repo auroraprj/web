@@ -13,6 +13,6 @@ Característica: Crear Página
          Y relleno lo siguiente:
            | Título | P1 |
            | Cuerpo | Texto para Cuerpo |
-         Y pulso el botón "Guardar y publicar"
+         Y pulso el botón "Guardar"
   Entonces debo ver el mensaje de confirmación "Página básica P1 se ha creado"
          Y debo ver el texto "Texto para Cuerpo" en la zona "Contenedor Principal"
