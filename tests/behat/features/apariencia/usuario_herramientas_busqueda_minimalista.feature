@@ -15,7 +15,7 @@ Característica: Menú de usuario, menú de herramienta y caja de búsqueda mini
     Dado que soy un usuario anónimo
     Cuando voy a la página de inicio
     Entonces debo ver el icono "glyphicon-search" en la zona "Navegación plegable"
-      Y debo ver "Search" en la zona "Navegación plegable"
+      Y debo ver "Buscar" en la zona "Navegación plegable"
 
   Escenario: Visualizar el menú de usuario en la zona de navegación plegable
     Dado que soy un usuario anónimo
