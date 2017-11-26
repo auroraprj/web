@@ -9,7 +9,9 @@ script:
   - docker build -t auroraprj/auroraprj .
   - cd ..
   - docker-compose up -d
+  - if [ $? != 0 ]; then docker-compose logs; fi
   - docker-compose exec drupal /aurora_init.sh --branch $BRANCH
+  - if [ $? != 0 ]; then docker-compose logs; fi
   - docker-compose exec drupal /aurora_test.sh --branch $BRANCH
 
 notifications:
