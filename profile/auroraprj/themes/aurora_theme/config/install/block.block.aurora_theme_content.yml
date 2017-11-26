@@ -1,0 +1,22 @@
+uuid: d15bed45-f746-4ec0-b29b-c1ffcdda4b93
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - aurora_theme
+_core:
+  default_config_hash: gBuIUwPvCNhg5Z9fpZZJ6bz3ZNy0ub-kYXlz2zBTyWY
+id: aurora_theme_content
+theme: aurora_theme
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

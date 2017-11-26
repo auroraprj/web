@@ -1,0 +1,22 @@
+uuid: d348d80a-3154-4e6e-8579-acf7c5659f8a
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - aurora_theme
+_core:
+  default_config_hash: rYKfPicvNZmbO9z8hGksmdBfIyKEDc4NbV-ucebdwFk
+id: aurora_theme_help
+theme: aurora_theme
+region: help
+weight: -7
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

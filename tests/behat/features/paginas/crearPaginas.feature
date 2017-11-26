@@ -11,7 +11,7 @@ Característica: Crear Página
          Y hago click en "Agregar contenido"
          Y hago click en "Página básica"
          Y relleno lo siguiente:
-           | Título | P1 |
+           | Title | P1 |
            | Cuerpo | Texto para Cuerpo |
          Y pulso el botón "Guardar"
   Entonces debo ver el mensaje de confirmación "Página básica P1 se ha creado"

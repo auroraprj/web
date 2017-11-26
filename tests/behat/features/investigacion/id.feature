@@ -32,4 +32,4 @@ Característica: ID de investigación es obligatorio y único
                | Dotación Económica | 1 |
              # notar que el Id es repetido en Antecedentes
     Y        pulso el botón "Guardar"
-    Entonces debo ver un mensaje de error "Ya existe un contenido con id zxcv"
+    Entonces debo ver un mensaje de error "Ya existe un content con id zxcv"

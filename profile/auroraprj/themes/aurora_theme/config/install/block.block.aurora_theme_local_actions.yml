@@ -1,0 +1,20 @@
+uuid: ea846e29-e20e-4033-9b98-c34402b4e0b0
+langcode: en
+status: true
+dependencies:
+  theme:
+    - aurora_theme
+_core:
+  default_config_hash: K2AwDPvgqX_eOK9UWBkK77Gj4LsbzBmt_CUJKobD35M
+id: aurora_theme_local_actions
+theme: aurora_theme
+region: header
+weight: -7
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

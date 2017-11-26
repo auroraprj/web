@@ -1,0 +1,22 @@
+uuid: 3bafe3fe-b761-4c7f-a2cf-5d2d74b176d3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - aurora_theme
+_core:
+  default_config_hash: 6nRrpmSYtNiE9cJFp41e0s2GSWLpCJEnasEL2WUfY9A
+id: aurora_theme_messages
+theme: aurora_theme
+region: header
+weight: -7
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

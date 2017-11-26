@@ -6,6 +6,8 @@ core: '8.x'
 version: '8.x-alfa.0.7'
 
 dependencies:
+  - auroracore
+  - aurorasync
   - basic_auth
   - block_content
   - breakpoint

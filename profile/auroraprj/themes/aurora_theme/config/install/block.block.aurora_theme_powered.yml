@@ -1,0 +1,22 @@
+uuid: 025091bf-a96e-4222-a9a9-e82b2c4ccd82
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - aurora_theme
+_core:
+  default_config_hash: 0rPRn5wmIdfHiimICw3PJw_jsdSsyH-ym40spBp6bhQ
+id: aurora_theme_powered
+theme: aurora_theme
+region: footer
+weight: -7
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

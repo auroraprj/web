@@ -30,5 +30,5 @@ default:
       text:
         log_out: 'Cerrar sesión'
         log_in: 'Iniciar sesión'
-        username_field: 'Nombre de usuario'
+        username_field: 'Username'
         password_field: 'Contraseña'

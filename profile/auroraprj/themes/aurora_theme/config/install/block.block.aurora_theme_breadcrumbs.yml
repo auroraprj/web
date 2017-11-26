@@ -1,0 +1,22 @@
+uuid: 6854e859-4ec0-4497-8ba5-5913532624cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - aurora_theme
+_core:
+  default_config_hash: 7153Lh_-LHuJmxGN_Gtq1EzP3XKDuTW5DnjSTw9drlE
+id: aurora_theme_breadcrumbs
+theme: aurora_theme
+region: header
+weight: -7
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }
