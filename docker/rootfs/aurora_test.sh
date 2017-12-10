@@ -10,8 +10,8 @@ if [[ $? -ne 4 ]]; then
     exit 1
 fi
 
-SHORT=nb:
-LONG=nopull,branch:
+SHORT=nb:t:
+LONG=nopull,branch:,tags:
 
 # -temporarily store output to be able to check for errors
 # -activate advanced mode getopt quoting e.g. via “--options”
@@ -37,6 +37,10 @@ while true; do
             branch=$2
             shift 2
             ;;
+        -t|--tags)
+            tags="--tags $2"
+            shift 2
+            ;;
         --)
             shift
             break
@@ -50,6 +54,7 @@ done
 
 echo "branch: $branch"
 echo "pull: $pull"
+echo "tags: $tags"
 
 #-- sincronizar con github si es necesario
 if (( $pull )); then
@@ -77,9 +82,8 @@ if [ "${behat_instalado%/*}" != "behat" ];then
 
   #-- aplicamos parche a drupal-extension (ver pull-request #407 de drupal-extension)
   cd $drupal/vendor/drupal/drupal-extension
-  curl https://patch-diff.githubusercontent.com/raw/jhedstrom/drupalextension/pull/407.diff | patch -p1 --forward
 fi
 
 #-- tests funcionales con behat
 cd /tests/behat
-$drupal/vendor/bin/behat -f progress
+$drupal/vendor/bin/behat -f progress $tags
