@@ -1,0 +1,28 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_organizaciones
+    - node.type.investigacion
+    - taxonomy.vocabulary.organizaciones
+id: node.investigacion.field_organizaciones
+field_name: field_organizaciones
+entity_type: node
+bundle: investigacion
+label: 'Apoyan la investigación'
+description: 'Organizaciones que apoyan esta investigación'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      organizaciones: organizaciones
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

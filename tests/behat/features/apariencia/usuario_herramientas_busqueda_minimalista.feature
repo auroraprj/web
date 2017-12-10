@@ -23,7 +23,7 @@ Característica: Menú de usuario, menú de herramienta y caja de búsqueda mini
     Entonces debo ver el icono "glyphicon-user" en la zona "Navegación plegable"
       Y debo ver el enlace "Iniciar sesión" en la zona "Navegación plegable"
 
-@api
+  @api
   Escenario: Visualizar el menú de herramientas en la zona de navegación plegable
     Dado que estoy conectado como usuario con rol "aurora_editor"
     Cuando voy a la página de inicio

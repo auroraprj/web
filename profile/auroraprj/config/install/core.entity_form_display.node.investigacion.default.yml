@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.investigacion.field_dotacion_economica
     - field.field.node.investigacion.field_id
     - field.field.node.investigacion.field_image
+    - field.field.node.investigacion.field_organizaciones
     - image.style.thumbnail
     - node.type.investigacion
   module:
@@ -13,7 +14,7 @@ dependencies:
     - path
     - text
 _core:
-  default_config_hash: 1TlNmj95ZSHWLLZBh5jsuB7i0_-ympHRWrLM9c3-tZA
+  default_config_hash: xvnEma885njF3lrmic-KPSbTn0GKJ_vFJppquPqIIfU
 id: node.investigacion.default
 targetEntityType: node
 bundle: investigacion
@@ -27,17 +28,20 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
   created:
     type: datetime_timestamp
     weight: 4
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_dotacion_economica:
-    weight: 11
+    weight: 12
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
   field_id:
     weight: 1
     settings:
@@ -45,6 +49,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_image:
     weight: 10
     settings:
@@ -52,21 +57,42 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_organizaciones:
+    weight: 11
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   langcode:
     type: language_select
     weight: 2
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
+    region: content
   path:
     type: path
     weight: 8
     settings: {  }
     third_party_settings: {  }
+    region: content
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 6
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 13
+    region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
@@ -74,6 +100,7 @@ content:
       display_label: true
     weight: 7
     third_party_settings: {  }
+    region: content
   title:
     type: string_textfield
     weight: 0
@@ -81,8 +108,10 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   translation:
     weight: 5
+    region: content
     settings: {  }
     third_party_settings: {  }
   uid:
@@ -93,4 +122,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden: {  }

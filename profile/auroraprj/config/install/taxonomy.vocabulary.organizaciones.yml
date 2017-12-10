@@ -1,0 +1,8 @@
+langcode: es
+status: true
+dependencies: {  }
+name: Organizaciones
+vid: organizaciones
+description: Organizaciones
+hierarchy: 0
+weight: 0
