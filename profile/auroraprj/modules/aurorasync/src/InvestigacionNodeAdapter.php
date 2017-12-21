@@ -9,7 +9,7 @@ use Drupal\aurorasync\Comparable;
  * Adaptador
  *
  */
-class NodeAdapter implements Comparable {
+class InvestigacionNodeAdapter implements InvestigacionInterface, Comparable {
 
   protected $node;
 
@@ -31,6 +31,18 @@ class NodeAdapter implements Comparable {
 
   public function setTitulo( $titulo ) {
     $this->node->set('title', $titulo );
+  }
+
+  public function getOrganizaciones() {
+    return $this->node->entityTypeManager()->getStorage('Organizaciones')->load($this->node->field_organizaciones);
+  }
+
+  public function setOrganizaciones( $tidsOrganizaciones ) {
+    $this->node->set('organizaciones', $tidsOrganizaciones)
+  }
+
+  public function getNombresOrganizaciones() {
+    return $this->getOrganizaciones()->name;
   }
 
   public function getDotacion() {
@@ -77,6 +89,7 @@ class NodeAdapter implements Comparable {
     return md5(($this->getId() !== null ? $this->getId() : '') .
                ($this->getTitulo() !== null ? $this->getTitulo() : '' ) .
                ($this->getDotacion() !== null ? $this->getDotacion() : '' ) .
+               ($this->getNombresOrganizaciones() !== null ? $this->getNombresOrganizaciones() : '' ) .
                ($this->getBody() !== null ? $this->getBody() : '' ));
   }
 

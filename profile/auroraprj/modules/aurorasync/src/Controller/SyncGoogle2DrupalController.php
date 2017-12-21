@@ -7,34 +7,38 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\auroracore\Entity\Investigacion;
 use Drupal\aurorasync\GoogleDocReader;
-use Drupal\aurorasync\GoogleDocAdapter;
-use Drupal\aurorasync\NodeAdapter;
+use Drupal\aurorasync\InvestigacionGoogleDocAdapter;
+use Drupal\aurorasync\InvestigacionNodeAdapter;
 
-use Drupal\auroracore\InvestigacionManager;
+use Drupal\auroracore\InvestigacionesManager;
 
 /**
  * An example controller.
  */
 class SyncGoogle2DrupalController extends ControllerBase {
 
-  protected $investigacionManager;
+  protected $investigacionesManager;
+  protected $organizacionesManager
   protected $userStorage;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('auroracore.investigacion_manager'));
+    return new static($container->get('auroracore.investigacion_manager'), $container->get('auroracore.organizaciones_manager'));
   }
 
   /**
    * Constructor
    *
-   * @param Drupal\auroracore\InvestigacionManager $investigacionManager
-   *   A database connection.
+   * @param Drupal\auroracore\InvestigacionesManager $investigacionesManager
+   *   Controlador para Investigaciones
+   * @param Drupal\auroracore\OrganizacionesManager $oganizacionesManager
+   *   Controlador para Organizaciones
    */
-  public function __construct(InvestigacionManager $investigacionManager) {
-    $this->investigacionManager = $investigacionManager;
+  public function __construct(InvestigacionesManager $investigacionesManager, OrganizacionesManager $organizacionesManager) {
+    $this->investigacionesManager = $investigacionesManager;
+    $this->organizacionesMangager = $organizacionesManager;
     $this->userStorage = $this->entityManager()->getStorage('user');
   }
 
@@ -58,22 +62,23 @@ class SyncGoogle2DrupalController extends ControllerBase {
         $m = '';
 
         // adaptador de investigación sobre Google Docs
-        $adaptador = new GoogleDocAdapter($value);
+        $investigacionGoogleDoc = new InvestigacionGoogleDocAdapter($value);
 
         // adaptador sobre nodo en Drupal con el mismo ID (si no existe, lo crea)
-        $nodeAdaptador = new NodeAdapter( $this->investigacionManager->loadOrCreateByFieldId($adaptador->getId()) );
+        $investigacionDrupal = new InvestigacionNodeAdapter( $this->investigacionesManager->loadOrCreateByFieldId($investigacionGoogleDoc->getId()) );
 
         // si no se iguales, copiamos el contenido de Google Docs en Drupal
-        if(!$adaptador->igual($nodeAdaptador)) {
+        if(!$investigacionGoogleDoc->igual($investigacionDrupal)) {
 
-          $nodeAdaptador->nuevaRevision( $this->currentUser() );
+          $investigacionDrupal->nuevaRevision( $this->currentUser() );
 
-          $nodeAdaptador->setTitulo( $adaptador->getTitulo() );
-          $nodeAdaptador->setDotacion( $adaptador->getDotacion() );
-          $nodeAdaptador->setBody( $adaptador->getBody() );
+          $investigacionDrupal->setTitulo( $investigacionGoogleDoc->getTitulo() );
+          $investigacionDrupal->setOrganizaciones( $this->organizacionesMangager->loadOrCreateByName($investigacionGoogleDoc->getNombresOrganizaciones()) );
+          $investigacionDrupal->setDotacion( $investigacionGoogleDoc->getDotacion() );
+          $investigacionDrupal->setBody( $investigacionGoogleDoc->getBody() );
 
           // validamos el nodo
-          $violations = $nodeAdaptador->validate();
+          $violations = $investigacionDrupal->validate();
 
           // algún problema?
           if ($violations->count() > 0) {
@@ -86,13 +91,13 @@ class SyncGoogle2DrupalController extends ControllerBase {
           }
           else {
             // todo OK. Grabamos!
-            $nodeAdaptador->save();
+            $investigacionDrupal->save();
             $m .= ' <strong>Actualizado</strong>';
           }
         }
 
         $markup .= '<li>';
-        $markup .= $nodeAdaptador->toLink( 'node: ' . $nodeAdaptador->getId() )->toString();
+        $markup .= $investigacionDrupal->toLink( 'node: ' . $investigacionDrupal->getId() )->toString();
         $markup .= $m;
         $markup .= '</li>';
       }

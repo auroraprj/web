@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\node\Entity\Node;
 
-class InvestigacionManager {
+class InvestigacionesManager {
 
   protected $entityQuery;
   protected $entityTypeManager;

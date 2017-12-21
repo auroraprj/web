@@ -7,7 +7,7 @@ use Drupal\aurorasync\Comparable;
  * Adaptador
  *
  */
-class GoogleDocAdapter implements Comparable {
+class InvestigacionGoogleDocAdapter implements InvestigacionInterface, Comparable {
 
   protected $celdas;
 
@@ -30,7 +30,7 @@ class GoogleDocAdapter implements Comparable {
     return isset($this->celdas['I']) ? $fmt->parse(trim($this->celdas['I'])) : 0;
   }
 
-  public function getOrganizaciones() {
+  public function getNombresOrganizaciones() {
     return isset($this->celdas['D']) ? $this->celdas['D'] : null;
   }
 
@@ -76,7 +76,7 @@ class GoogleDocAdapter implements Comparable {
 
     return ($this->getInvPrincipal() !== null ? '<p><strong>Investigador/a Principal</strong>: ' . $this->getInvPrincipal() . '</p>' : '') .
            ($this->getCentro() !== null ? '<p><strong>Centro de Investigación</strong>: ' . $this->getCentro() . '</p>' : '') .
-           ($this->getOrganizaciones() !== null ? '<p><strong>Soporte Económico</strong>: ' . $this->getOrganizaciones() . '</p>' : '') .
+           ($this->getNombresOrganizaciones() !== null ? '<p><strong>Soporte Económico</strong>: ' . $this->getNombresOrganizaciones() . '</p>' : '') .
            ($this->getDotacionTotal() !== null ? '<p><strong>Dotación Económica Total</strong>: ' . $this->getDotacionTotal() . '</p>' : '') .
            ($this->getTiempo() !== null ? '<p><strong>Tiempo</strong>: ' . $this->getTiempo() . '</p>' : '') .
            ($this->getPeriodo() !== null ? '<p><strong>Periodo</strong>: ' . $this->getPeriodo() . '</p>' : '') .
@@ -88,7 +88,8 @@ class GoogleDocAdapter implements Comparable {
   public function hash() {
     return md5(($this->getId() !== null ? $this->getId() : '') .
                ($this->getTitulo() !== null ? $this->getTitulo() : '' ) .
-               ($this->getDotacion() !== null ? $this->getDotacion() : '' ) . 
+               ($this->getDotacion() !== null ? $this->getDotacion() : '' ) .
+               ($this->getNombresOrganizaciones() !== null ? $this->getNombresOrganizaciones() : '' ) .
                ($this->getBody() !== null ? $this->getBody() : '' ));
   }
 
