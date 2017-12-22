@@ -8,7 +8,7 @@ services:
       - MARIADB_USER=bn_drupal
       - MARIADB_DATABASE=bitnami_drupal
     volumes:
-      - 'mariadb_data:/bitnami'
+      - "./docker_data/mariadb_data:/bitnami"
   drupal:
     image: 'auroraprj/auroraprj:latest'
     labels:
@@ -23,9 +23,9 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - 'drupal_data:/bitnami'
-      - 'aurora_tests:/tests'
-      - 'aurora_config:/config'
+      - "./docker_data/drupal_data:/bitnami"
+      - "./docker_data/aurora_tests:/tests"
+      - "./docker_data/aurora_config:/config"
     depends_on:
       - mariadb
 volumes:
