@@ -3,8 +3,10 @@
 namespace Drupal\aurorasync;
 
 use Drupal\aurorasync\Comparable;
+use Drupal\auroracore\InvestigacionInterface;
+
 /**
- * Adaptador
+ * Adaptador GoogleDoc --> Investigación
  *
  */
 class InvestigacionGoogleDocAdapter implements InvestigacionInterface, Comparable {

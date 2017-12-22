@@ -11,6 +11,7 @@ use Drupal\aurorasync\InvestigacionGoogleDocAdapter;
 use Drupal\aurorasync\InvestigacionNodeAdapter;
 
 use Drupal\auroracore\InvestigacionesManager;
+use Drupal\auroracore\OrganizacionesManager;
 
 /**
  * An example controller.
@@ -18,14 +19,14 @@ use Drupal\auroracore\InvestigacionesManager;
 class SyncGoogle2DrupalController extends ControllerBase {
 
   protected $investigacionesManager;
-  protected $organizacionesManager
+  protected $organizacionesManager;
   protected $userStorage;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('auroracore.investigacion_manager'), $container->get('auroracore.organizaciones_manager'));
+    return new static($container->get('auroracore.investigaciones_manager'), $container->get('auroracore.organizaciones_manager'));
   }
 
   /**
@@ -38,7 +39,7 @@ class SyncGoogle2DrupalController extends ControllerBase {
    */
   public function __construct(InvestigacionesManager $investigacionesManager, OrganizacionesManager $organizacionesManager) {
     $this->investigacionesManager = $investigacionesManager;
-    $this->organizacionesMangager = $organizacionesManager;
+    $this->organizacionesManager = $organizacionesManager;
     $this->userStorage = $this->entityManager()->getStorage('user');
   }
 
@@ -65,17 +66,24 @@ class SyncGoogle2DrupalController extends ControllerBase {
         $investigacionGoogleDoc = new InvestigacionGoogleDocAdapter($value);
 
         // adaptador sobre nodo en Drupal con el mismo ID (si no existe, lo crea)
-        $investigacionDrupal = new InvestigacionNodeAdapter( $this->investigacionesManager->loadOrCreateByFieldId($investigacionGoogleDoc->getId()) );
+        $investigacionDrupal = new InvestigacionNodeAdapter(
+                                     $this->investigacionesManager->loadOrCreateByFieldId($investigacionGoogleDoc->getId()),
+                                     $this->organizacionesManager
+                                   );
 
         // si no se iguales, copiamos el contenido de Google Docs en Drupal
         if(!$investigacionGoogleDoc->igual($investigacionDrupal)) {
 
+          // vamos a modificar... nueva revisión
           $investigacionDrupal->nuevaRevision( $this->currentUser() );
 
+          // nuevo título, dotación económica, body
           $investigacionDrupal->setTitulo( $investigacionGoogleDoc->getTitulo() );
-          $investigacionDrupal->setOrganizaciones( $this->organizacionesMangager->loadOrCreateByName($investigacionGoogleDoc->getNombresOrganizaciones()) );
           $investigacionDrupal->setDotacion( $investigacionGoogleDoc->getDotacion() );
           $investigacionDrupal->setBody( $investigacionGoogleDoc->getBody() );
+
+          // asociaciones que apoyan la investigación
+          $investigacionDrupal->setNombresOrganizaciones( $investigacionGoogleDoc->getNombresOrganizaciones() );
 
           // validamos el nodo
           $violations = $investigacionDrupal->validate();

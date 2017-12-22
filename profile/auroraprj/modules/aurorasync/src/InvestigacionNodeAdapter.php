@@ -4,17 +4,21 @@ namespace Drupal\aurorasync;
 
 use Drupal\node\Entity\Node;
 use Drupal\aurorasync\Comparable;
+use Drupal\auroracore\InvestigacionInterface;
+use Drupal\auroracore\OrganizacionesManager;
 
 /**
- * Adaptador
+ * Adaptador Node --> Investigación
  *
  */
 class InvestigacionNodeAdapter implements InvestigacionInterface, Comparable {
 
   protected $node;
+  protected $organizacionesManager;
 
-  public function __construct( Node $node ) {
+  public function __construct( Node $node, OrganizacionesManager $organizacionesManager ) {
     $this->node = $node;
+    $this->organizacionesManager = $organizacionesManager;
   }
 
   public function getNode() {
@@ -34,15 +38,20 @@ class InvestigacionNodeAdapter implements InvestigacionInterface, Comparable {
   }
 
   public function getOrganizaciones() {
-    return $this->node->entityTypeManager()->getStorage('Organizaciones')->load($this->node->field_organizaciones);
+    return $this->node->get('field_organizaciones');
   }
 
   public function setOrganizaciones( $tidsOrganizaciones ) {
-    $this->node->set('organizaciones', $tidsOrganizaciones)
+    $this->node->set('field_organizaciones', ['target_id' => $tidsOrganizaciones]);
   }
 
   public function getNombresOrganizaciones() {
-    return $this->getOrganizaciones()->name;
+    $tids = $this->getOrganizaciones()->target_id;
+    return ($tids === null ? null : $this->organizacionesManager->load($tids)->getName());
+  }
+
+  public function setNombresOrganizaciones( $nombresOrganizaciones ) {
+    $this->setOrganizaciones($nombresOrganizaciones !== null ? $this->organizacionesManager->loadOrCreateByName($nombresOrganizaciones)->get('tid')->value : null);
   }
 
   public function getDotacion() {
