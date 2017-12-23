@@ -1,4 +1,10 @@
 sudo: required
+
+language: php
+
+php:
+  - nightly
+
 services:
   - docker
 
