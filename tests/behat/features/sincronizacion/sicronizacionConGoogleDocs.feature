@@ -18,6 +18,9 @@ Característica: Sincronización de la información de Google Docs en Drupal
       E "investigacion" con contenido:
           | title  | field_id | status |
           | Existe | EXISTE   | 1      |
+      Y "organizaciones" términos:
+          | name |
+          | Asociación Exite |
 
   Escenario: Sincronización real sin errores
     # notar que visito la URL de sincronización real
@@ -34,7 +37,7 @@ Característica: Sincronización de la información de Google Docs en Drupal
       Y debo ver el texto "12.345,67€" en la zona "Contenedor Principal"
       Y debo ver el texto "Dr. Existe" en la zona "Contenedor Principal"
       Y debo ver el texto "Instituto Existe" en la zona "Contenedor Principal"
-      Y debo ver el texto "Asociación Existe" en la zona "Contenedor Principal"
+      Y el campo "Apoyan la Investigación" debe contener "Asociación Exite"
 
   Escenario: En la hoja de cálculo hay una investigación que no está en Drupal
     # URL de test de sincronización
@@ -46,4 +49,4 @@ Característica: Sincronización de la información de Google Docs en Drupal
       Y debo ver el texto "76.543,21€" en la zona "Contenedor Principal"
       Y debo ver el texto "Dra. Nueva" en la zona "Contenedor Principal"
       Y debo ver el texto "Instituto Nueva" en la zona "Contenedor Principal"
-      Y debo ver el texto "Asociación Nueva" en la zona "Contenedor Principal"
+      Y el campo "Apoyan la Investigación" debe contener "Asociación Nueva"
