@@ -14,6 +14,11 @@ script:
   - cd docker
   - docker build -t auroraprj/auroraprj .
   - cd ..
+  - mkdir docker_data
+  - mkdir docker_data/drupal_data
+  - mkdir docker_data/mariadb_data
+  - mkdir docker_data/aurora_config
+  - mkdir docker_data/aurora_tests
   - docker-compose up -d
   - if [ $? != 0 ]; then docker-compose logs; fi
   - docker-compose exec drupal /aurora_init.sh --branch $BRANCH
