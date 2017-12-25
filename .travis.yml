@@ -18,7 +18,8 @@ script:
   - mkdir docker_data/drupal_data
   - mkdir docker_data/mariadb_data
   - mkdir docker_data/aurora_config
-  - mkdir docker_data/aurora_tests
+  - mkdir docker_data/aurora_test
+  - chmod -R g+wx *
   - docker-compose up -d
   - if [ $? != 0 ]; then docker-compose logs; fi
   - docker-compose exec drupal /aurora_init.sh --branch $BRANCH
