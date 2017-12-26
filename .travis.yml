@@ -8,9 +8,7 @@ php:
 services:
   - docker
 
-script:
-  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+install:
   - cd docker
   - docker build -t auroraprj/auroraprj .
   - cd ..
@@ -18,13 +16,19 @@ script:
   - mkdir docker_data/drupal_data
   - mkdir docker_data/mariadb_data
   - mkdir docker_data/aurora_config
-  - mkdir docker_data/aurora_test
-  - chmod -R g+wx *
+  - mkdir docker_data/aurora_tests
+
+before_script:
   - docker-compose up -d
-  - if [ $? != 0 ]; then docker-compose logs; fi
+
+script:
+  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
   - docker-compose exec drupal /aurora_init.sh --branch $BRANCH
-  - if [ $? != 0 ]; then docker-compose logs; fi
   - docker-compose exec drupal /aurora_test.sh --branch $BRANCH
+
+after_failure:
+  - docker-compose logs
 
 notifications:
   email:
