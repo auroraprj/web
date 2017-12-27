@@ -17,8 +17,7 @@ install:
   - mkdir docker_data/mariadb_data
   - mkdir docker_data/aurora_config
   - mkdir docker_data/aurora_tests
-  - chown -R :root ./docker_data && chmod -R g+rwX ./docker_data
-
+  
 before_script:
   - docker-compose up -d
 
