@@ -17,7 +17,8 @@ install:
   - mkdir docker_data/mariadb_data
   - mkdir docker_data/aurora_config
   - mkdir docker_data/aurora_tests
-  
+  - chown 1001:1001 -R ./datadirectory fixes the error.
+
 before_script:
   - docker-compose up -d
 
@@ -28,6 +29,8 @@ script:
   - docker-compose exec drupal /aurora_test.sh --branch $BRANCH
 
 after_failure:
+  - ls -lrt
+  - ls -lrt docker_data
   - docker-compose logs
 
 notifications:
