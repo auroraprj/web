@@ -17,7 +17,6 @@ install:
   - mkdir docker_data/mariadb_data
   - mkdir docker_data/aurora_config
   - mkdir docker_data/aurora_tests
-  - chown 1001:1001 -R ./docker_data
 
 before_script:
   # posible solución para issue #12 --> ver https://stackoverflow.com/a/45244373
