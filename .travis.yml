@@ -20,6 +20,8 @@ install:
   - chown 1001:1001 -R ./docker_data
 
 before_script:
+  # posible solución para issue #12 --> ver https://stackoverflow.com/a/45244373
+  - docker-compose run --user="root" --entrypoint chown mariadb  -R 1001 /bitnami
   - docker-compose up -d
 
 script:
