@@ -17,7 +17,7 @@ install:
   - mkdir docker_data/mariadb_data
   - mkdir docker_data/aurora_config
   - mkdir docker_data/aurora_tests
-  - chown 1001:1001 -R ./datadirectory fixes the error.
+  - chown 1001:1001 -R ./docker_data
 
 before_script:
   - docker-compose up -d
