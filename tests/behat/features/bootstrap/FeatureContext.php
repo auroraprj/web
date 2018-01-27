@@ -52,7 +52,23 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
       $cssFilter = sprintf('span[class*="%s"]', $icono);
       $elements = $regionObj->findAll('css', $cssFilter);
       if (empty($elements)) {
-        throw new \Exception(sprintf('No se ha encontrado ningún elemento "%s" en la zona "%s" de la URL "%s"', $cssFilter, $zona, $this->getSession()->getCurrentUrl()));
+        throw new \Exception(sprintf('No encontrado ningún elemento "%s" en la zona "%s" de la URL "%s"', $cssFilter, $zona, $this->getSession()->getCurrentUrl()));
+      }
+    }
+
+    /**
+     * @Then debo ver :valor en el campo :campo
+     */
+    public function assertValorCampo($valor, $campo) {
+      // buscamos el campo
+      $element = $this->getSession()->getPage()->find('named', array('content', $campo));
+      if (empty($element)) {
+        throw new \Exception(sprintf('No encontrado ningún campo "%s" en la URL "%s"', $campo, $this->getSession()->getCurrentUrl()));
+      }
+      // buscamos el valor a partir del elemento padre
+      $encontrado = $element->getParent()->find('named', array('content',$valor));
+      if (empty($encontrado)) {
+        throw new \Exception(sprintf('No encontrado ningún valor "%s" en el campo "%s" de la URL "%s"', $valor, $campo, $this->getSession()->getCurrentUrl()));
       }
     }
 

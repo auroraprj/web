@@ -1,5 +1,5 @@
 # language: es
-@api @wip
+@api
 Característica: Cada Investigación puede contar con Organizaciones que apoyan
   monetariamente dicha Investigación
 

@@ -1,5 +1,5 @@
 # language: es
-@api
+@api @wip
 Característica: Sincronización de la información de Google Docs en Drupal
 
   La situación inicial del Catálogo es una Hoja de Cálculo en Google Docs.
@@ -20,7 +20,7 @@ Característica: Sincronización de la información de Google Docs en Drupal
           | Existe | EXISTE   | 1      |
       Y "organizaciones" términos:
           | name |
-          | Asociación Exite |
+          | Asociación Existe |
 
   Escenario: Sincronización real sin errores
     # notar que visito la URL de sincronización real
@@ -33,11 +33,12 @@ Característica: Sincronización de la información de Google Docs en Drupal
       Y visito "/investigaciones/EXISTE"
       Y hago click en "Existe"
     Entonces debo ver el encabezado "Existe" en la zona "Contenedor Principal"
+      Y debo ver "EXISTE" en el campo "Id"
+      Y debo ver "Asociación Existe" en el campo "Apoyan la investigación"
       Y debo ver el texto "EXISTE" en la zona "Contenedor Principal"
       Y debo ver el texto "12.345,67€" en la zona "Contenedor Principal"
       Y debo ver el texto "Dr. Existe" en la zona "Contenedor Principal"
       Y debo ver el texto "Instituto Existe" en la zona "Contenedor Principal"
-      Y el campo "Apoyan la Investigación" debe contener "Asociación Exite"
 
   Escenario: En la hoja de cálculo hay una investigación que no está en Drupal
     # URL de test de sincronización
@@ -45,8 +46,9 @@ Característica: Sincronización de la información de Google Docs en Drupal
       Y visito "/investigaciones/NUEVA"
       Y hago click en "Nueva"
     Entonces debo ver el encabezado "Nueva" en la zona "Contenedor Principal"
+      Y debo ver "NUEVA" en el campo "Id"
+      Y debo ver "Asociación Nueva" en el campo "Apoyan la investigación"
       Y debo ver el texto "NUEVA" en la zona "Contenedor Principal"
       Y debo ver el texto "76.543,21€" en la zona "Contenedor Principal"
       Y debo ver el texto "Dra. Nueva" en la zona "Contenedor Principal"
       Y debo ver el texto "Instituto Nueva" en la zona "Contenedor Principal"
-      Y el campo "Apoyan la Investigación" debe contener "Asociación Nueva"

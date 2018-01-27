@@ -19,7 +19,7 @@ install:
   - mkdir docker_data/aurora_tests
 
 before_script:
-  # posible solución para issue #12 --> ver https://stackoverflow.com/a/45244373
+  # posible solución para issue #41 --> ver https://stackoverflow.com/a/45244373
   - docker-compose run --user="root" --entrypoint chown mariadb  -R 1001 /bitnami
   - docker-compose up -d
 
