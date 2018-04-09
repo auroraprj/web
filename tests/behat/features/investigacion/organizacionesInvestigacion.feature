@@ -27,7 +27,7 @@ Característica: Cada Investigación puede contar con Organizaciones que apoyan
         | Cuerpo| Prueba |
         | Apoyan la investigación | ORG01 |
         | Dotación Económica | 1 |
-      Y marco "Publishing status"
+      Y marco "Estado de publicación"
       Y pulso el botón "Guardar"
     Entonces debo ver el mensaje de confirmación "Investigación PRUEBA01 se ha creado"
 
@@ -43,7 +43,7 @@ Característica: Cada Investigación puede contar con Organizaciones que apoyan
         | Dotación Económica | 1 |
       Y pulso el botón "Añadir otro elemento"
       Y relleno "Apoyan la investigación" con "ORG99"
-      Y marco "Publishing status"
+      Y marco "Estado de publicación"
       Y pulso el botón "Guardar"
     Entonces debo ver el mensaje de confirmación "Investigación PRUEBA02 se ha creado"
 
