@@ -72,6 +72,9 @@ fi
 #-- vamos con drupal. Usaremos drush para operar
 cd $drupal
 
+#-- módulo drupal/csv_serialization
+composer require drupal/csv_serialization
+
 #-- descargamos Bootstrap theme
 drush -y pm-download bootstrap
 

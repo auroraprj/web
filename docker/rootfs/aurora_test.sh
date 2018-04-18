@@ -77,6 +77,9 @@ if [ "${behat_instalado%/*}" != "behat" ];then
   #-- activamos behat
   composer require --dev behat/behat
 
+  #-- activamos Behat-TableAssert
+  composer require --dev ingenerator/behat-tableassert
+
   #-- activamos drupal-extension
   composer require --dev drupal/drupal-extension
 

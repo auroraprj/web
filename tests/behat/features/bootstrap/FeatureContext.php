@@ -72,4 +72,51 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
       }
     }
 
+    /**
+     * @Then la respuesta debe contener una cabecera :name que contiene :value
+     */
+    public function laRespuestaDebeContenerUnaCabeceraQueContiene($name, $value)
+    {
+      $actual = $this->getSession()->getResponseHeader($name);
+
+      if ( stripos($actual, $value) === FALSE ) {
+        throw new \Exception(sprintf('El valor "%s" no está en la cabecera "%s" de la respuesta (actual="%s")', $value, $name, $actual));
+      }
+
+    }
+
+    /**
+     * @Then deben aparecer en formato CSV los siguiente campos
+     */
+    public function debenAparecerEnFormatoCsvLosSiguienteCampos(TableNode $expected)
+    {
+      $all_comparators = [
+        'field_dotacion_economica' => function ($expected, $actual) { return round($expected, 2) == round($actual, 2); },
+      ];
+      $comparators = array();
+
+      $actual = \Ingenerator\BehatTableAssert\TableParser\CSVTable::fromMinkResponse($this->getMink()->getSession());
+      $assert = new \Ingenerator\BehatTableAssert\AssertTable;
+
+      $table = $expected->getTable();
+      reset($table);
+      $first_row = key($table);
+
+      foreach ($table[$first_row] as $key => $field) {
+        if (array_key_exists($field, $all_comparators)) {
+          $comparators[$field] = $all_comparators[$field];
+        }
+      }
+
+      $assert->isComparable(
+        $expected,
+        $actual,
+        [
+          'comparators' => $comparators,
+          'ignoreColumnSequence' => TRUE,
+          'ignoreExtraColumns' => TRUE
+        ]
+      );
+    }
+
 }

@@ -1,5 +1,5 @@
 # language: es
-@api @wip
+@api
 Característica: Sincronización de la información de Google Docs en Drupal
 
   La situación inicial del Catálogo es una Hoja de Cálculo en Google Docs.

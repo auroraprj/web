@@ -16,6 +16,7 @@ dependencies:
   - config
   - config_translation
   - content_translation
+  - csv_serialization
   - field
   - file
   - filter
