@@ -1,4 +1,5 @@
 #!/bin/bash -e
+
 # basado en app-entrypoint.sh de bitnami
 
 touch /stop.drupal_not_ready
@@ -12,8 +13,8 @@ if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
   echo "repongo profiles"
   [[ ! -d /bitnami/profiles ]] && mkdir /bitnami/profiles
   [[ ! -L /opt/bitnami/drupal/profiles ]] && rm -fR /opt/bitnami/drupal/profiles &&  ln -s /bitnami/profiles /opt/bitnami/drupal/profiles
-  nami_initialize apache php drupal
-
+  . /init.sh
+  nami_initialize apache php mysql-client drupal
   info "Starting drupal... "
 fi
 

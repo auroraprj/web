@@ -72,14 +72,8 @@ fi
 #-- vamos con drupal. Usaremos drush para operar
 cd $drupal
 
-#-- módulo drupal/csv_serialization
-composer require drupal/csv_serialization
-
-#-- descargamos Bootstrap theme
-drush -y pm-download bootstrap
-
-#-- descargamos módulo RESTui
-drush -y pm-download restui
+#-- módulos necesarios
+composer require drupal/csv_serialization drupal/bootstrap drupal/restui
 
 #-- necesario para instalación
 chmod u+w ./sites/default/settings.php
@@ -90,7 +84,7 @@ drush -y site-install auroraprj
 #-- acciones post-instalación
 
 #-- activamos tema aurora_theme y lo activamos como tema por defecto
-drush -y pm-enable aurora_theme
+drush -y theme:enable aurora_theme
 drush -y config-set system.theme default aurora_theme
 
 #-- nombre del sitio
