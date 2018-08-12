@@ -10,9 +10,6 @@ touch /stop.drupal_not_ready
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
-  echo "repongo profiles"
-  [[ ! -d /bitnami/profiles ]] && mkdir /bitnami/profiles
-  [[ ! -L /opt/bitnami/drupal/profiles ]] && rm -fR /opt/bitnami/drupal/profiles &&  ln -s /bitnami/profiles /opt/bitnami/drupal/profiles
   . /init.sh
   nami_initialize apache php mysql-client drupal
   info "Starting drupal... "

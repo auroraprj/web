@@ -5,7 +5,7 @@ ENV PATH="/opt/bitnami/git/bin:$PATH"
 
 RUN install_packages patch
 
-RUN bitnami-pkg install git-2.14.1-0
+RUN bitnami-pkg install git-2.18.0-0
 
 COPY rootfs /
 

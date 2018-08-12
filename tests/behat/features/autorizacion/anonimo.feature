@@ -15,7 +15,7 @@ Característica: Restricción de acceso para usuarios anónimos
 
   Escenario: No existe enlace para crear contenido
     Cuando voy a la página de inicio
-    Entonces no debo ver el enlace "Agregar contenido"
+    Entonces no debo ver el enlace "Añadir contenido"
 
   Escenario: No es posible crear páginas estáticas accediendo mediante url
     Cuando voy a "/node/add/page"

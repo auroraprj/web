@@ -14,7 +14,7 @@ Característica: ID de investigación es obligatorio y único
 
   Escenario: Es obligatorio el ID de investigación
     Cuando   voy a la página de inicio
-    Y        hago click en "Agregar contenido"
+    Y        hago click en "Añadir contenido"
     Y        relleno lo siguiente:
                | Investigación | Prueba |
                | Cuerpo| Prueba |
@@ -24,7 +24,7 @@ Característica: ID de investigación es obligatorio y único
 
   Escenario: El ID de investigación debe ser único
     Cuando   voy a la página de inicio
-    Y        hago click en "Agregar contenido"
+    Y        hago click en "Añadir contenido"
     Y        relleno lo siguiente:
                | Investigación | Prueba |
                | Id | zxcv |

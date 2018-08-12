@@ -14,7 +14,7 @@ Característica: Restricción de acceso para editores
 
   Escenario: No tengo enlace para crear páginas
     Cuando voy a la página de inicio
-      Y hago click en "Agregar contenido"
+      Y hago click en "Añadir contenido"
     Entonces no debo ver el enlace "Página"
 
   Escenario: No es posible crear páginas estáticas accediendo mediante url

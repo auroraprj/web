@@ -8,7 +8,7 @@ Característica: Crear Página
   Escenario: Crear una página estática
       Dado que estoy conectado como usuario con rol "aurora_manager"
     Cuando voy a la página de inicio
-         Y hago click en "Agregar contenido"
+         Y hago click en "Añadir contenido"
          Y hago click en "Página básica"
          Y relleno lo siguiente:
            | Título | P1 |

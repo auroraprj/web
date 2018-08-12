@@ -28,4 +28,4 @@ Característica: Menú de usuario, menú de herramienta y caja de búsqueda mini
     Dado que estoy conectado como usuario con rol "aurora_editor"
     Cuando voy a la página de inicio
     Entonces debo ver el icono "glyphicon-wrench" en la zona "Navegación plegable"
-      Y debo ver el enlace "Agregar contenido" en la zona "Navegación plegable"
+      Y debo ver el enlace "Añadir contenido" en la zona "Navegación plegable"

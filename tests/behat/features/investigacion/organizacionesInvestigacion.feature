@@ -20,7 +20,7 @@ Característica: Cada Investigación puede contar con Organizaciones que apoyan
   Escenario: Poder indicar una organización al crear la investigación
     Dado que estoy conectado como usuario con rol "aurora_editor"
     Cuando voy a la página de inicio
-      Y hago click en "Agregar contenido"
+      Y hago click en "Añadir contenido"
       Y relleno lo siguiente:
         | Investigación | PRUEBA01 |
         | Id | PRUEBA01 |
@@ -34,7 +34,7 @@ Característica: Cada Investigación puede contar con Organizaciones que apoyan
   Escenario: Poder indicar más de una organización al crear la investigación
     Dado que estoy conectado como usuario con rol "aurora_editor"
     Cuando voy a la página de inicio
-      Y hago click en "Agregar contenido"
+      Y hago click en "Añadir contenido"
       Y relleno lo siguiente:
         | Investigación | PRUEBA02 |
         | Id | PRUEBA02 |
