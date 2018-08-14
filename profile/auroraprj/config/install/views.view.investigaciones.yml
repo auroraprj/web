@@ -1,3 +1,4 @@
+uuid: 95f4af9b-5d80-44a8-988c-82a80f5e049c
 langcode: es
 status: true
 dependencies:
@@ -9,13 +10,12 @@ dependencies:
     - node.type.investigacion
     - system.menu.main
   module:
-    - csv_serialization
     - node
     - rest
     - serialization
     - user
 _core:
-  default_config_hash: 4Cn8MbSps2gep8Oa-BdEcZcHfpCANAVKnsJoHKdFgsI
+  default_config_hash: Y8XAQLrZNd2yf0KMyQg6Q-20QsmzM8JQUgnqjx2UQyc
 id: investigaciones
 label: Investigaciones
 module: views
@@ -424,9 +424,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  rest_export_1:
+  rest_export_investigaciones:
     display_plugin: rest_export
-    id: rest_export_1
+    id: rest_export_investigaciones
     display_title: 'REST export'
     position: 3
     display_options:
@@ -435,9 +435,7 @@ display:
       style:
         type: serializer
         options:
-          uses_fields: false
           formats:
-            csv: csv
             json: json
             xml: xml
       defaults:
@@ -448,10 +446,16 @@ display:
         type: data_field
         options:
           field_options:
-            counter:
+            title:
               alias: ''
               raw_output: false
-            title:
+            field_id:
+              alias: ''
+              raw_output: false
+            field_organizaciones:
+              alias: ''
+              raw_output: false
+            field_dotacion_economica:
               alias: ''
               raw_output: false
       pager:
@@ -463,39 +467,54 @@ display:
           id: title
           table: node_field_data
           field: title
-          entity_type: node
-          entity_field: title
-          label: ''
-          alter:
-            alter_text: false
-            make_link: false
-            absolute: false
-            trim: false
-            word_boundary: false
-            ellipsis: false
-            strip_tags: false
-            html: false
-          hide_empty: false
-          empty_zero: false
-          settings:
-            link_to_entity: true
-          plugin_id: field
           relationship: none
           group_type: group
           admin_label: ''
+          label: ''
           exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: false
+            ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: true
+            trim: false
+            preserve_tags: ''
+            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
           empty: ''
+          hide_empty: false
+          empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
           type: string
+          settings:
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -506,6 +525,9 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
         field_id:
           id: field_id
           table: node__field_id
@@ -601,7 +623,7 @@ display:
             more_link: false
             more_link_text: ''
             more_link_path: ''
-            strip_tags: false
+            strip_tags: true
             trim: false
             preserve_tags: ''
             html: false

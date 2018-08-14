@@ -1,10 +1,14 @@
 <?php
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Context\Environment\InitializedContextEnvironment;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+
+use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Drupal\DrupalExtension\Context\DrupalContext;
+
+use TravisCarden\BehatTableComparison\TableEqualityAssertion;
 
 /**
  * Defines application features from the specific context.
@@ -118,5 +122,59 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
         ]
       );
     }
+
+    /**
+     * @Then deben aparecer en formato Json los siguiente campos
+     */
+    public function debenAparecerEnFormatoJsonLosSiguienteCampos(TableNode $expected)
+    {
+      $actual = new TableNode(json_decode($this->getMink()->getSession()->getDriver()->getContent(),true));
+
+      // Build and execute assertion.
+      (new TableEqualityAssertion($expected, $actual))
+          ->respectRowOrder()
+          ->assert();
+    }
+
+    /**
+     * @When visito la pagina de exportación de la Organización :org con salida en formato :formato
+     */
+    public function visitoLaPaginaDeExportacionDeLaOrganizacionConSalidaEnFormato($org, $formato)
+    {
+
+      /** @var InitializedContextEnvironment $environment */
+      $environment = $this->getDrupal()->getEnvironment();
+      // Throw an exception if the environment is not yet initialized. To make
+      // sure state doesn't leak between test scenarios, the environment is
+      // reinitialized at the start of every scenario. If this code is executed
+      // before a test scenario starts (e.g. in a `@BeforeScenario` hook) then the
+      // contexts cannot yet be retrieved.
+      if (!$environment instanceof InitializedContextEnvironment) {
+          throw new \Exception('Cannot retrieve contexts when the environment is not yet initialized.');
+      }
+
+      foreach ($environment->getContexts() as $context) {
+          if ($context instanceof DrupalContext) {
+              $terms = $context->terms;
+          }
+      }
+
+      foreach ($terms as $term) {
+        var_export($term);
+
+        if( $term->name === $org) {
+          $encontrado = $term;
+        }
+      }
+
+      if (empty($encontrado)) {
+        throw new \Exception(sprintf('No encontrada ninguna Organización con el nombre "%s"', $org));
+      }
+
+      // Set internal page on the term.
+      $this->getSession()->visit($this->locatePath('/REST/taxonomy/term/' . $encontrado->tid . '?_format=' . $formato));
+
+    }
+
 
 }
