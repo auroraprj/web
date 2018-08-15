@@ -1,5 +1,5 @@
 # language: es
-@api @wip
+@api
 Característica: Exportación en Json de las Investigaciones activas de una Organización
 
   Beneficio: permitir que el usuario reutilice los datos de las investigaciones

@@ -49,6 +49,58 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     }
 
     /**
+    * get DrupalContext
+    *
+    * @return Drupal\DrupalExtension\Context\DrupalContext
+    */
+    public function getDrupalContext()
+    {
+
+      /** @var InitializedContextEnvironment $environment */
+      $environment = $this->getDrupal()->getEnvironment();
+
+      // Throw an exception if the environment is not yet initialized. To make
+      // sure state doesn't leak between test scenarios, the environment is
+      // reinitialized at the start of every scenario. If this code is executed
+      // before a test scenario starts (e.g. in a `@BeforeScenario` hook) then the
+      // contexts cannot yet be retrieved.
+      if (!$environment instanceof InitializedContextEnvironment) {
+        throw new \Exception('Cannot retrieve contexts when the environment is not yet initialized');
+      }
+
+      foreach ($environment->getContexts() as $context) {
+        if ($context instanceof DrupalContext) {
+          return $context;
+        }
+      }
+
+      throw new \Exception('DrupalContext not found');
+    }
+
+    /**
+    * Look up for a table in the page
+    * @return array bidimensional
+    */
+    public function tableFromView() {
+
+      // table elemtent
+      $table = $this->getSession()->getPage()->find('xpath', '//table');
+      if(empty($table)) {
+        throw new \Exception('Table element not found');
+      }
+
+      $tabla = array();
+      foreach ($table->findAll('xpath','//tr') as $row) {
+        $fila = array();
+        foreach ($row->findAll('xpath','//td') as $col) {
+          array_push($fila,$col->getText());
+        }
+      array_push($tabla, $fila);
+      }
+      return $tabla;
+    }
+
+    /**
     * @Then debo ver el icono :arg1 en la zona :arg2
     */
     public function assertIconoZona($icono, $zona) {
@@ -90,47 +142,13 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then deben aparecer en formato CSV los siguiente campos
-     */
-    public function debenAparecerEnFormatoCsvLosSiguienteCampos(TableNode $expected)
-    {
-      $all_comparators = [
-        'field_dotacion_economica' => function ($expected, $actual) { return round($expected, 2) == round($actual, 2); },
-      ];
-      $comparators = array();
-
-      $actual = \Ingenerator\BehatTableAssert\TableParser\CSVTable::fromMinkResponse($this->getMink()->getSession());
-      $assert = new \Ingenerator\BehatTableAssert\AssertTable;
-
-      $table = $expected->getTable();
-      reset($table);
-      $first_row = key($table);
-
-      foreach ($table[$first_row] as $key => $field) {
-        if (array_key_exists($field, $all_comparators)) {
-          $comparators[$field] = $all_comparators[$field];
-        }
-      }
-
-      $assert->isComparable(
-        $expected,
-        $actual,
-        [
-          'comparators' => $comparators,
-          'ignoreColumnSequence' => TRUE,
-          'ignoreExtraColumns' => TRUE
-        ]
-      );
-    }
-
-    /**
      * @Then deben aparecer en formato Json los siguiente campos
      */
     public function debenAparecerEnFormatoJsonLosSiguienteCampos(TableNode $expected)
     {
       $actual = new TableNode(json_decode($this->getMink()->getSession()->getDriver()->getContent(),true));
 
-      // Build and execute assertion.
+      // Build and execute assertion
       (new TableEqualityAssertion($expected, $actual))
           ->respectRowOrder()
           ->assert();
@@ -142,26 +160,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     public function visitoLaPaginaDeExportacionDeLaOrganizacionConSalidaEnFormato($org, $formato)
     {
 
-      /** @var InitializedContextEnvironment $environment */
-      $environment = $this->getDrupal()->getEnvironment();
-      // Throw an exception if the environment is not yet initialized. To make
-      // sure state doesn't leak between test scenarios, the environment is
-      // reinitialized at the start of every scenario. If this code is executed
-      // before a test scenario starts (e.g. in a `@BeforeScenario` hook) then the
-      // contexts cannot yet be retrieved.
-      if (!$environment instanceof InitializedContextEnvironment) {
-          throw new \Exception('Cannot retrieve contexts when the environment is not yet initialized.');
-      }
-
-      foreach ($environment->getContexts() as $context) {
-          if ($context instanceof DrupalContext) {
-              $terms = $context->terms;
-          }
-      }
-
-      foreach ($terms as $term) {
-        var_export($term);
-
+      foreach ($this->getDrupalContext()->terms as $term) {
         if( $term->name === $org) {
           $encontrado = $term;
         }
@@ -173,6 +172,19 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
       // Set internal page on the term.
       $this->getSession()->visit($this->locatePath('/REST/taxonomy/term/' . $encontrado->tid . '?_format=' . $formato));
+
+    }
+
+    /**
+     * @Then debo ver una tabla como la siguiente:
+     */
+    public function deboVerUnaTablaComoLaSiguiente(TableNode $expected) {
+      $actual = new TableNode($this->tableFromView());
+
+      // Build and execute assertion
+      (new TableEqualityAssertion($expected, $actual))
+          ->respectRowOrder()
+          ->assert();
 
     }
 

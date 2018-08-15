@@ -1,5 +1,5 @@
 # language: es
-@api
+@api 
 Característica: Lista de Organizaciones que apoyan a Investigación contra Cáncer
   Infantil
 
@@ -12,6 +12,8 @@ Característica: Lista de Organizaciones que apoyan a Investigación contra Cán
     Dado que soy un usuario anónimo
       Y "organizaciones" términos:
           | name  |
+          | ZZULTIMA |
+          | AAPRIMERA |
           | ORG01 |
           | ORG02 |
           | ORG99 |
@@ -26,8 +28,11 @@ Característica: Lista de Organizaciones que apoyan a Investigación contra Cán
     Entonces I should see "ORG01" in the 1 row
 
   Escenario: Las Organzaciones deben aparecer en listado ordenado alfabéticamente
-    Cuando visito "organizaciones/ORG01+ORG02+ORG99+ORG03"
-    Entonces I should see "ORG01" in the 1 row
-      Y I should see "ORG02" in the 2 row
-      Y I should see "ORG03" in the 3 row
-      Y I should see "ORG99" in the 4 row
+    Cuando visito "organizaciones/ORG01+ORG02+ORG99+ORG03+AAPRIMERA+ZZULTIMA"
+    Entonces debo ver una tabla como la siguiente:
+        | AAPRIMERA |
+        | ORG01 |
+        | ORG02 |
+        | ORG03 |
+        | ORG99 |
+        | ZZULTIMA |

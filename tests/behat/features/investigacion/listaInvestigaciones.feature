@@ -1,5 +1,5 @@
 # language: es
-@api
+@api 
 Característica: Lista de Investigaciones contra Cáncer Infantil activas
 
   Beneficio: Ver rápidamente las Investigaciones contra Cáncer Infatil activas
@@ -21,11 +21,13 @@ Característica: Lista de Investigaciones contra Cáncer Infantil activas
 
   Escenario: La vista Investigaciones debe permitirme filtra por Id
     Cuando visito "investigaciones/TEST_LI1"
-    Entonces I should see "Test Z" in the 1 row
+    Entonces debo ver una tabla como la siguiente:
+        | Test Z |
 
   Escenario: Las Investigaciones deben aparecer en listado ordenado
     Cuando visito "investigaciones/TEST_LI1+TEST_LI2+TEST_LI3+TEST_LI4"
-    Entonces I should see "Test A" in the 1 row
-      Y I should see "Test B" in the 2 row
-      Y I should see "Test Y" in the 3 row
-      Y I should see "Test Z" in the 4 row
+    Entonces debo ver una tabla como la siguiente:
+        | Test A |
+        | Test B |
+        | Test Y |
+        | Test Z |

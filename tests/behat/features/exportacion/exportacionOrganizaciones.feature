@@ -1,5 +1,5 @@
 # language: es
-@api @wip
+@api
 Característica: Exportación en Json de las Organizaciones
 
   Beneficio: permitir que el usuario reutilice los datos de las Organizaciones.
