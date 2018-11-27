@@ -1,11 +1,11 @@
-FROM bitnami/drupal:latest
+FROM bitnami/drupal:8.5.6
 LABEL description="Aurora Project"
 
 ENV PATH="/opt/bitnami/git/bin:$PATH"
 
 RUN install_packages patch
 
-RUN bitnami-pkg install git-2.18.0-0
+RUN bitnami-pkg install git-2.19.2-0
 
 COPY rootfs /
 
