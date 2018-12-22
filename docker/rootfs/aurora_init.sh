@@ -78,6 +78,10 @@ composer require drupal/csv_serialization drupal/bootstrap drupal/restui
 #-- necesario para instalación
 chmod u+w ./sites/default/settings.php
 
+#-- aplicamos parche para #2999737: Node and comment delete action require a plugin type
+#--   ver https://www.drupal.org/project/drupal/issues/2999737
+curl https://www.drupal.org/files/issues/2018-10-01/2999737-14.patch | patch -p1 --forward
+
 #-- instalamos el site auroraprj
 drush -y site-install auroraprj
 

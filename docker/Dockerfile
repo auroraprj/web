@@ -1,4 +1,4 @@
-FROM bitnami/drupal:8.5.6
+FROM bitnami/drupal:latest
 LABEL description="Aurora Project"
 
 ENV PATH="/opt/bitnami/git/bin:$PATH"
